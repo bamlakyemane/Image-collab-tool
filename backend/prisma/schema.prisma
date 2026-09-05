@@ -1,0 +1,152 @@
+// backend/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Users table
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String   // Hashed password
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Notification preferences as JSON
+  notificationPreferences Json @default("{\"newThread\": true, \"newReply\": true, \"threadResolved\": true}")
+
+  role      String   @default("user") // "user", "moderator", "admin", "super_admin"
+  isBanned  Boolean  @default(false)
+  bannedAt  DateTime?
+  bannedReason String?
+  bannedBy  Int? 
+
+  // Relationships
+  activities Activity[]
+  images    Image[]  // User can have many images
+  comments  Comment[] // User can have many comments
+  pins      Pin[]    // User can have many pins
+  reports   Report[] @relation("reporter")
+  resolvedReports Report[] @relation("resolver")
+
+  @@map("users")
+}
+
+// Images table
+model Image {
+  id         Int      @id @default(autoincrement())
+  fileName   String
+  fileUrl    String   // URL to the image in storage
+  thumbnailUrl String? // URL to thumbnail
+  uploadDate DateTime @default(now())
+  commentCount Int    @default(0)
+  lastActivity DateTime @updatedAt
+
+  // Foreign keys
+  ownerId    Int
+  owner      User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  // Relationships
+  shareLinks ShareLink[] // Image can have multiple share links
+  pins       Pin[]       // Image can have many pins
+  activities Activity[]  // Image can have many activities
+
+  @@map("images")
+}
+
+// ShareLinks table
+model ShareLink {
+  id           Int      @id @default(autoincrement())
+  token        String   @unique
+  isActive     Boolean  @default(true)
+  expirationDate DateTime?
+  requiresLogin Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Foreign keys
+  imageId      Int
+  image        Image    @relation(fields: [imageId], references: [id], onDelete: Cascade)
+
+  @@map("share_links")
+}
+
+// Pins table
+model Pin {
+  id           Int      @id @default(autoincrement())
+  xCoordinate  Float    // X position on image (percentage)
+  yCoordinate  Float    // Y position on image (percentage)
+  isResolved   Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Foreign keys
+  imageId      Int
+  image        Image    @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  creatorId    Int
+  creator      User     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  // Relationships
+  comments     Comment[] // Pin can have many comments
+
+  @@map("pins")
+}
+
+// Comments table
+model Comment {
+  id           Int      @id @default(autoincrement())
+  content      String   @db.Text
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Foreign keys
+  pinId        Int
+  pin          Pin      @relation(fields: [pinId], references: [id], onDelete: Cascade)
+  authorId     Int
+  author       User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@map("comments")
+}
+
+model Report {
+  id          Int      @id @default(autoincrement())
+  targetType  String   // "image", "comment", "pin", "user"
+  targetId    Int
+  reason      String   // "spam", "harassment", "inappropriate", "other"
+  details     String?  // Optional additional details
+  status      String   @default("pending") // "pending", "reviewed", "resolved", "rejected"
+  createdAt   DateTime @default(now())
+  resolvedAt  DateTime?
+  adminNote   String?
+
+  // Foreign keys
+  reporterId  Int      // User who reported
+  reporter    User     @relation("reporter", fields: [reporterId], references: [id])
+
+  resolvedBy  Int?     // Admin/Mod who resolved it
+  resolver    User?    @relation("resolver", fields: [resolvedBy], references: [id])
+
+  @@map("reports")
+}
+
+// Activities table
+model Activity {
+  id           Int      @id @default(autoincrement())
+  action       String   // "upload", "share", "comment", "resolve"
+  createdAt    DateTime @default(now())
+
+  // Foreign keys
+  imageId      Int
+  image        Image    @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("activities")
+}
