@@ -49,9 +49,12 @@ app.get("/api/health", (req, res) => {
 });
 
 // ✅ Dynamic CORS for development and production
-const allowedOrigins = (
-  process.env.ALLOWED_ORIGINS || "http://localhost:5173"
-).split(",");
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://image-collab-tool.vercel.app",
+  process.env.FRONTEND_URL,
+].filter(Boolean);
 
 console.log("✅ CORS allowed origins:", allowedOrigins);
 
