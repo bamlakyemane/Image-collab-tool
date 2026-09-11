@@ -452,7 +452,7 @@ const SharedImageViewer = ({ imageId, imageUrl, initialPins = [] }) => {
                 >
                   <img
                     ref={imageRef}
-                    src={`http://localhost:5000${imageUrl}`}
+                    src={`${BACKEND_URL}${imageUrl}`}
                     alt="Shared Image"
                     style={styles.image}
                     draggable={false}

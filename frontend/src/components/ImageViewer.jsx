@@ -437,7 +437,7 @@ const ImageViewer = ({ imageId, imageUrl }) => {
                 >
                   <img
                     ref={imageRef}
-                    src={`http://localhost:5000${imageUrl}`}
+                    src={`${BACKEND_URL}${imageUrl}`}
                     alt="Image"
                     style={styles.image}
                     draggable={false}

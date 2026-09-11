@@ -86,13 +86,10 @@ export const getSharedImage = async (token) => {
       console.log("getSharedImage - No token found");
     }
 
-    const response = await fetch(
-      `http://localhost:5000/api/images/shared/${token}`,
-      {
-        method: "GET",
-        headers: headers,
-      },
-    );
+    const response = await fetch(`${BACKEND_URL}/api/images/shared/${token}`, {
+      method: "GET",
+      headers: headers,
+    });
 
     const data = await response.json();
     console.log("Shared image response (fetch):", data);

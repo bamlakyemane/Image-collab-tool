@@ -555,7 +555,7 @@ const AdminDashboard = () => {
                       >
                         {image.fileUrl ? (
                           <img
-                            src={`http://localhost:5000${image.fileUrl}`}
+                            src={`${BACKEND_URL}${image.fileUrl}`}
                             alt={image.fileName}
                             style={styles.thumbnail}
                             onError={(e) => {
