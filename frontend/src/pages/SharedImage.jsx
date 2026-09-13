@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom";
 import { getSharedImage } from "../services/imageService";
 import { useAuth } from "../context/AuthContext";
 import SharedImageViewer from "../components/SharedImageViewer";
+import { BACKEND_URL } from "../config";
 
 console.log("=== SHARED IMAGE MODULE LOADED ===");
 

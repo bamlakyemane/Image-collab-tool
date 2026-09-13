@@ -10,6 +10,7 @@ import {
   generateShareLink,
   deleteImage,
 } from "../services/imageService";
+import { BACKEND_URL } from "../config";
 
 const Library = () => {
   const { user, logout, loading: authLoading } = useAuth();

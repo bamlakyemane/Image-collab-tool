@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { FiSearch, FiX, FiFilter } from "react-icons/fi";
+import { BACKEND_URL } from "../config";
 
 const CommentSearch = ({ onSearch, onFilter, filterOptions }) => {
   const [searchTerm, setSearchTerm] = useState("");

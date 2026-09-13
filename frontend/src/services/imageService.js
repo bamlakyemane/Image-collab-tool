@@ -1,6 +1,7 @@
 // frontend/src/services/imageService.js
 
 import API from "./api";
+import { BACKEND_URL } from "../config";
 
 // Upload multiple images with progress tracking
 export const uploadMultipleImages = async (files, onProgress) => {

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
+import { BACKEND_URL } from "../config";
 
 const AdminDashboard = () => {
   const { user, logout } = useAuth();

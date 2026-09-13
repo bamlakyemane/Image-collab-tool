@@ -17,6 +17,7 @@ import {
   getPins,
 } from "../services/commentService";
 import CommentSearch from "./CommentSearch";
+import { BACKEND_URL } from "../config";
 
 const SharedImageViewer = ({ imageId, imageUrl, initialPins = [] }) => {
   const { user, isAuthenticated } = useAuth();
