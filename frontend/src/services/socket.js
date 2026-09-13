@@ -1,7 +1,7 @@
 // frontend/src/services/socket.js
 
 import { io } from "socket.io-client";
-import config from "../config";
+import { SOCKET_URL } from "../config";
 
 let socket = null;
 let isInitialized = false;
@@ -20,7 +20,7 @@ export const initializeSocket = (token) => {
 
   const authToken = token || localStorage.getItem("token");
 
-  socket = io("https://image-collab-tool-api.onrender.com", {
+  socket = io(SOCKET_URL, {
     auth: {
       token: authToken,
     },

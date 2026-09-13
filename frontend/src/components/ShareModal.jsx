@@ -142,7 +142,7 @@ const ShareModal = ({ image, onClose, onUpdate }) => {
         <div style={styles.body}>
           <div style={styles.imageInfo}>
             <img
-              src={`http://localhost:5000${image.fileUrl}`}
+              src=src={`${BACKEND_URL}${image.fileUrl}`}
               alt={image.fileName}
               style={styles.thumbnail}
             />

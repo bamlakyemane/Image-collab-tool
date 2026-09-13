@@ -4,7 +4,7 @@ import axios from "axios";
 import config from "../config";
 
 const API = axios.create({
-  baseURL: "https://image-collab-tool-api.onrender.com/api",
+  baseURL: config.API_URL,
 });
 
 // Add a request interceptor to include token
