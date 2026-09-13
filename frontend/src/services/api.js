@@ -1,20 +1,18 @@
 // frontend/src/services/api.js
 
 import axios from "axios";
-import config from "../config";
+import { API_URL } from "../config"; // ✅ Use named import
 
 const API = axios.create({
-  baseURL: config.API_URL,
+  baseURL: API_URL,
 });
 
 // Add a request interceptor to include token
 API.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
-
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-    } else {
     }
     return config;
   },
@@ -23,21 +21,18 @@ API.interceptors.request.use(
   },
 );
 
-// Add a response interceptor
+// Add a response interceptor to handle token expiration
 API.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   (error) => {
-    // Only redirect to login for 401 errors that are NOT from the shared image endpoint
-    const isSharedRoute = error.config?.url?.includes("/shared/");
-
-    if (error.response?.status === 401 && !isSharedRoute) {
-      // Token expired or invalid - only redirect for non-shared routes
-      localStorage.removeItem("token");
-      window.location.href = "/login";
+    if (error.response?.status === 401) {
+      // Only redirect for non-shared routes
+      const isSharedRoute = error.config?.url?.includes("/shared/");
+      if (!isSharedRoute) {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
     }
-
     return Promise.reject(error);
   },
 );

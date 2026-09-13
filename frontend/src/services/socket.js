@@ -1,7 +1,7 @@
 // frontend/src/services/socket.js
 
 import { io } from "socket.io-client";
-import { SOCKET_URL } from "../config";
+import { SOCKET_URL } from "../config"; // ✅ Use named import
 
 let socket = null;
 let isInitialized = false;
@@ -33,7 +33,6 @@ export const initializeSocket = (token) => {
 
   socket.on("connect", () => {
     isInitialized = true;
-    // Re-apply any global listeners
     Object.keys(globalListeners).forEach((event) => {
       globalListeners[event].forEach((callback) => {
         socket.on(event, callback);
@@ -41,13 +40,12 @@ export const initializeSocket = (token) => {
     });
   });
 
-  socket.on("welcome", (data) => {});
-
-  socket.on("disconnect", (reason) => {
+  socket.on("disconnect", () => {
     isInitialized = false;
   });
 
   socket.on("connect_error", (error) => {
+    console.error("Socket connection error:", error.message);
     isInitialized = false;
   });
 
@@ -67,7 +65,6 @@ export const getSocket = () => {
   return null;
 };
 
-// ✅ NEW: Register a listener that persists across reconnections
 export const registerListener = (event, callback) => {
   if (!globalListeners[event]) {
     globalListeners[event] = [];
@@ -79,7 +76,6 @@ export const registerListener = (event, callback) => {
   }
 };
 
-// ✅ NEW: Remove a listener
 export const removeListener = (event, callback) => {
   if (globalListeners[event]) {
     globalListeners[event] = globalListeners[event].filter(
@@ -95,28 +91,16 @@ export const joinImageRoom = (imageId) => {
   if (!socket || !socket.connected) {
     return false;
   }
-
-  try {
-    socket.emit("join-image", imageId);
-
-    return true;
-  } catch (error) {
-    return false;
-  }
+  socket.emit("join-image", imageId);
+  return true;
 };
 
 export const leaveImageRoom = (imageId) => {
   if (!socket || !socket.connected) {
     return false;
   }
-
-  try {
-    socket.emit("leave-image", imageId);
-
-    return true;
-  } catch (error) {
-    return false;
-  }
+  socket.emit("leave-image", imageId);
+  return true;
 };
 
 export const disconnectSocket = () => {
