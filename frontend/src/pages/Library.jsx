@@ -180,7 +180,7 @@ const Library = () => {
               <div key={image.id} style={styles.card}>
                 <div style={styles.imageContainer}>
                   <img
-                    src={`http://localhost:5000${image.fileUrl}`}
+                    src={`${BACKEND_URL}${image.fileUrl}`}
                     alt={image.fileName}
                     style={styles.image}
                   />
