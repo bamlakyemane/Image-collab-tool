@@ -17,12 +17,8 @@ const Login = () => {
   const sessionRedirect = sessionStorage.getItem("redirectAfterLogin");
   const from = sessionRedirect || location.state?.from || "/library";
 
-  console.log("Login - sessionRedirect:", sessionRedirect);
-  console.log("Login - final from:", from);
-
   useEffect(() => {
     if (isAuthenticated) {
-      console.log("Login - Already authenticated, redirecting to:", from);
       sessionStorage.removeItem("redirectAfterLogin");
       navigate(from, { replace: true });
     }
@@ -33,12 +29,9 @@ const Login = () => {
     setError("");
     setLoading(true);
 
-    console.log("Login - Submitting form...");
     const result = await login(email, password);
-    console.log("Login - Result:", result);
 
     if (result.success) {
-      console.log("Login - Success, redirecting to:", from);
       const redirectPath = from;
       sessionStorage.removeItem("redirectAfterLogin");
       setTimeout(() => {

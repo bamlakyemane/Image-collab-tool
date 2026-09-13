@@ -31,7 +31,6 @@ const ShareModal = ({ image, onClose, onUpdate }) => {
         setShareLinks(result.shareLinks);
       }
     } catch (err) {
-      console.error("Failed to load share links:", err);
     } finally {
       setFetchingLinks(false);
     }
@@ -55,7 +54,6 @@ const ShareModal = ({ image, onClose, onUpdate }) => {
         setError(result.message || "Failed to generate share link");
       }
     } catch (err) {
-      console.error("Generate link error:", err);
       setError("Failed to generate share link");
     } finally {
       setLoading(false);
@@ -68,7 +66,6 @@ const ShareModal = ({ image, onClose, onUpdate }) => {
       setCopied(true);
       setTimeout(() => setCopied(false), 3000);
     } catch (err) {
-      console.error("Copy failed:", err);
       alert("Failed to copy link. Please copy manually.");
     }
   };
@@ -85,7 +82,6 @@ const ShareModal = ({ image, onClose, onUpdate }) => {
         if (onUpdate) onUpdate();
       }
     } catch (err) {
-      console.error("Toggle link error:", err);
       alert("Failed to update link status");
     }
   };
@@ -106,7 +102,6 @@ const ShareModal = ({ image, onClose, onUpdate }) => {
         if (onUpdate) onUpdate();
       }
     } catch (err) {
-      console.error("Revoke link error:", err);
       alert("Failed to delete share link");
     }
   };

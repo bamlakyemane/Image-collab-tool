@@ -45,7 +45,6 @@ const SharedImageViewer = ({ imageId, imageUrl, initialPins = [] }) => {
   // Load pins
   useEffect(() => {
     if (initialPins && initialPins.length > 0) {
-      console.log("📊 Using initialPins:", initialPins.length);
       setPins(initialPins);
     } else {
       loadPins();
@@ -57,11 +56,9 @@ const SharedImageViewer = ({ imageId, imageUrl, initialPins = [] }) => {
       setLoading(true);
       const result = await getPins(imageId);
       if (result.success) {
-        console.log("📊 Loaded pins:", result.pins.length);
         setPins(result.pins);
       }
     } catch (error) {
-      console.error("Failed to load pins:", error);
     } finally {
       setLoading(false);
     }
@@ -242,7 +239,6 @@ const SharedImageViewer = ({ imageId, imageUrl, initialPins = [] }) => {
         }
       }
     } catch (error) {
-      console.error("Failed to add pin:", error);
       alert("Failed to add comment. Please try again.");
     }
   };
@@ -279,7 +275,6 @@ const SharedImageViewer = ({ imageId, imageUrl, initialPins = [] }) => {
         }
       }
     } catch (error) {
-      console.error("Failed to add reply:", error);
       alert("Failed to add reply. Please try again.");
     }
   };
@@ -309,7 +304,6 @@ const SharedImageViewer = ({ imageId, imageUrl, initialPins = [] }) => {
         }
       }
     } catch (error) {
-      console.error("Failed to toggle pin status:", error);
       alert("Failed to update pin status. Please try again.");
     }
   };

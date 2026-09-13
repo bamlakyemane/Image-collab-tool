@@ -21,13 +21,12 @@ const AdminDashboard = () => {
   // ✅ Role check – redirect only if not admin
   useEffect(() => {
     if (!user) return;
-    console.log("AdminDashboard - User role:", user.role);
+
     if (!user.role.includes("admin")) {
-      console.log("AdminDashboard - Not admin, redirecting");
       navigate("/library");
       return;
     }
-    console.log("AdminDashboard - Access granted ✅");
+
     fetchData();
   }, [user]);
 
@@ -48,7 +47,6 @@ const AdminDashboard = () => {
       if (imagesRes.data.success) setImages(imagesRes.data.images);
       if (reportsRes.data.success) setReports(reportsRes.data.reports);
     } catch (err) {
-      console.error("Failed to fetch admin data:", err);
       setError("Failed to load admin data");
     } finally {
       setLoading(false);
@@ -82,7 +80,6 @@ const AdminDashboard = () => {
         alert(response.data.message);
       }
     } catch (err) {
-      console.error("Bulk delete error:", err);
       alert("Failed to delete images");
     }
   };
@@ -96,7 +93,6 @@ const AdminDashboard = () => {
         fetchData();
       }
     } catch (err) {
-      console.error("Delete image error:", err);
       alert("Failed to delete image");
     }
   };

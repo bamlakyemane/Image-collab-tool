@@ -74,7 +74,6 @@ export const generateShareLink = async (imageId, expirationDate) => {
 export const getSharedImage = async (token) => {
   try {
     const authToken = localStorage.getItem("token");
-    console.log("getSharedImage - Token from localStorage:", authToken);
 
     const headers = {
       "Content-Type": "application/json",
@@ -82,9 +81,7 @@ export const getSharedImage = async (token) => {
 
     if (authToken) {
       headers["Authorization"] = `Bearer ${authToken}`;
-      console.log("getSharedImage - Added Authorization header");
     } else {
-      console.log("getSharedImage - No token found");
     }
 
     const response = await fetch(`${BACKEND_URL}/api/images/shared/${token}`, {
@@ -93,7 +90,6 @@ export const getSharedImage = async (token) => {
     });
 
     const data = await response.json();
-    console.log("Shared image response (fetch):", data);
 
     if (!response.ok) {
       // Return the error data so it can be handled like axios
@@ -102,7 +98,6 @@ export const getSharedImage = async (token) => {
 
     return data;
   } catch (error) {
-    console.error("Get shared image error (fetch):", error);
     throw error;
   }
 };

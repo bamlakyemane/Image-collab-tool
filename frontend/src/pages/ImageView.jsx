@@ -31,7 +31,6 @@ const ImageView = () => {
         setError(result.message || "Failed to load image");
       }
     } catch (err) {
-      console.error("Failed to load image:", err);
       setError("Failed to load image");
     } finally {
       setLoading(false);

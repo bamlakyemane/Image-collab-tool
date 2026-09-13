@@ -52,11 +52,9 @@ const ImageViewer = ({ imageId, imageUrl }) => {
       setLoading(true);
       const result = await getPins(imageId);
       if (result.success) {
-        console.log("📊 Loaded pins:", result.pins.length);
         setPins(result.pins);
       }
     } catch (error) {
-      console.error("Failed to load pins:", error);
     } finally {
       setLoading(false);
     }
@@ -239,7 +237,6 @@ const ImageViewer = ({ imageId, imageUrl }) => {
         }
       }
     } catch (error) {
-      console.error("Failed to add pin:", error);
       alert("Failed to add comment. Please try again.");
     }
   };
@@ -276,7 +273,6 @@ const ImageViewer = ({ imageId, imageUrl }) => {
         }
       }
     } catch (error) {
-      console.error("Failed to add reply:", error);
       alert("Failed to add reply. Please try again.");
     }
   };
@@ -304,7 +300,6 @@ const ImageViewer = ({ imageId, imageUrl }) => {
         }
       }
     } catch (error) {
-      console.error("Failed to toggle pin status:", error);
       alert("Failed to update pin status. Please try again.");
     }
   };

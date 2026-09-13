@@ -44,7 +44,6 @@ const uploadImage = async (req, res) => {
       message: "Image uploaded successfully",
     });
   } catch (error) {
-    console.error("Upload error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to upload image",
@@ -97,7 +96,6 @@ const uploadMultipleImages = async (req, res) => {
       message: `${uploadedImages.length} images uploaded successfully`,
     });
   } catch (error) {
-    console.error("Multiple upload error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to upload images",
@@ -153,7 +151,6 @@ const getUserImages = async (req, res) => {
       images: formattedImages,
     });
   } catch (error) {
-    console.error("Get images error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch images",
@@ -210,7 +207,6 @@ const getImage = async (req, res) => {
       image,
     });
   } catch (error) {
-    console.error("Get image error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch image",
@@ -270,7 +266,6 @@ const generateShareLink = async (req, res) => {
       message: "Share link generated successfully",
     });
   } catch (error) {
-    console.error("Generate share link error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to generate share link",
@@ -287,10 +282,6 @@ const getSharedImage = async (req, res) => {
     const { token } = req.params;
     const userId = req.userId; // Get from auth middleware if available
 
-    console.log("=== getSharedImage ===");
-    console.log("Looking for token:", token);
-    console.log("User ID:", userId);
-
     // First, find the share link
     const shareLink = await prisma.shareLink.findFirst({
       where: {
@@ -299,8 +290,6 @@ const getSharedImage = async (req, res) => {
         OR: [{ expirationDate: null }, { expirationDate: { gt: new Date() } }],
       },
     });
-
-    console.log("Found shareLink:", shareLink ? "Yes" : "No");
 
     if (!shareLink) {
       return res.status(404).json({
@@ -311,15 +300,12 @@ const getSharedImage = async (req, res) => {
 
     // Check if login is required
     if (shareLink.requiresLogin && !userId) {
-      console.log("Login required - user not authenticated");
       return res.status(401).json({
         success: false,
         message: "Login required to view this image",
         requiresLogin: true,
       });
     }
-
-    console.log("User is authenticated, fetching image...");
 
     // Get the image with all data
     const image = await prisma.image.findUnique({
@@ -359,8 +345,6 @@ const getSharedImage = async (req, res) => {
       },
     });
 
-    console.log("Found image:", image ? "Yes" : "No");
-
     if (!image) {
       return res.status(404).json({
         success: false,
@@ -374,8 +358,6 @@ const getSharedImage = async (req, res) => {
       shareLink,
     });
   } catch (error) {
-    console.error("Get shared image error DETAILS:", error);
-    console.error("Error stack:", error.stack);
     res.status(500).json({
       success: false,
       message: "Failed to fetch shared image",
@@ -433,7 +415,6 @@ const revokeShareLink = async (req, res) => {
       message: "Share link revoked successfully",
     });
   } catch (error) {
-    console.error("Revoke share link error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to revoke share link",
@@ -476,7 +457,6 @@ const getShareLinks = async (req, res) => {
       shareLinks,
     });
   } catch (error) {
-    console.error("Get share links error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch share links",
@@ -523,7 +503,6 @@ const toggleShareLink = async (req, res) => {
       message: `Share link ${updated.isActive ? "activated" : "deactivated"}`,
     });
   } catch (error) {
-    console.error("Toggle share link error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to toggle share link",
@@ -564,7 +543,6 @@ const deleteImage = async (req, res) => {
       message: "Image deleted successfully",
     });
   } catch (error) {
-    console.error("Delete image error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to delete image",

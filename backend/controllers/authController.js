@@ -45,8 +45,6 @@ const signup = async (req, res) => {
       message: "User created successfully",
     });
   } catch (error) {
-    console.error("Signup error DETAILS:", error);
-    console.error("Error stack:", error.stack);
     res.status(500).json({
       success: false,
       message: "Server error during signup",
@@ -57,12 +55,8 @@ const signup = async (req, res) => {
 // Login controller
 const login = async (req, res) => {
   try {
-    console.log("=== Login Attempt ===");
-    console.log("Email:", req.body.email);
-
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log("Validation errors:", errors.array());
       return res.status(400).json({
         success: false,
         errors: errors.array(),
@@ -72,7 +66,6 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findByEmail(email);
-    console.log("User found:", user ? "Yes" : "No");
 
     if (!user) {
       return res.status(401).json({
@@ -82,7 +75,6 @@ const login = async (req, res) => {
     }
 
     const isPasswordValid = await User.comparePassword(user, password);
-    console.log("Password valid:", isPasswordValid);
 
     if (!isPasswordValid) {
       return res.status(401).json({
@@ -93,7 +85,6 @@ const login = async (req, res) => {
 
     const userJSON = User.toJSON(user);
     const token = generateToken(user.id);
-    console.log("Token generated for user:", user.id);
 
     res.json({
       success: true,
@@ -102,8 +93,6 @@ const login = async (req, res) => {
       message: "Login successful",
     });
   } catch (error) {
-    console.error("Login error DETAILS:", error);
-    console.error("Error stack:", error.stack);
     res.status(500).json({
       success: false,
       message: "Server error during login",
@@ -122,7 +111,7 @@ const getProfile = async (req, res) => {
         message: "User not found",
       });
     }
-    console.log("Profile fetched for user:", user.id, "role:", user.role);
+
     res.json({
       success: true,
       user: {
@@ -131,8 +120,6 @@ const getProfile = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Profile error DETAILS:", error);
-    console.error("Error stack:", error.stack);
     res.status(500).json({
       success: false,
       message: "Server error",

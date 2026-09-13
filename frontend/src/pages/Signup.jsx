@@ -22,9 +22,6 @@ const Signup = () => {
   const from =
     redirect || sessionRedirect || location.state?.from || "/library";
 
-  console.log("Signup - redirect from URL:", redirect);
-  console.log("Signup - final from:", from);
-
   useEffect(() => {
     if (isAuthenticated) {
       sessionStorage.removeItem("redirectAfterLogin");

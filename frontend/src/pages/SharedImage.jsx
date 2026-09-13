@@ -7,11 +7,7 @@ import { useAuth } from "../context/AuthContext";
 import SharedImageViewer from "../components/SharedImageViewer";
 import { BACKEND_URL } from "../config";
 
-console.log("=== SHARED IMAGE MODULE LOADED ===");
-
 const SharedImage = () => {
-  console.log("=== SharedImage Component RENDERED ===");
-
   const { token } = useParams();
   const { isAuthenticated, loading: authLoading } = useAuth();
   const [image, setImage] = useState(null);
@@ -21,15 +17,10 @@ const SharedImage = () => {
   const [requiresLogin, setRequiresLogin] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
 
-  console.log("SharedImage - Token:", token);
-  console.log("SharedImage - isAuthenticated:", isAuthenticated);
-  console.log("SharedImage - authLoading:", authLoading);
-
   // Wait for auth to finish loading
   useEffect(() => {
     if (!authLoading) {
       setAuthChecked(true);
-      console.log("Auth check complete, isAuthenticated:", isAuthenticated);
     }
   }, [authLoading, isAuthenticated]);
 
@@ -37,11 +28,9 @@ const SharedImage = () => {
   useEffect(() => {
     // Check if we have a redirect from login
     const redirectAfterLogin = sessionStorage.getItem("redirectAfterLogin");
-    console.log("SharedImage - redirectAfterLogin:", redirectAfterLogin);
 
     // If user is authenticated and there's a redirect, use it
     if (isAuthenticated && redirectAfterLogin) {
-      console.log("Authenticated with redirect, going to:", redirectAfterLogin);
       sessionStorage.removeItem("redirectAfterLogin");
       window.location.href = redirectAfterLogin;
       return;
@@ -49,11 +38,9 @@ const SharedImage = () => {
 
     // Don't do anything until auth is checked
     if (!authChecked) {
-      console.log("Waiting for auth check...");
       return;
     }
 
-    console.log("Auth checked, loading image...");
     loadSharedImage();
   }, [token, isAuthenticated, authChecked]);
 
@@ -62,21 +49,14 @@ const SharedImage = () => {
       setLoading(true);
       setError("");
 
-      console.log("Loading shared image for token:", token);
-      console.log("User authenticated:", isAuthenticated);
-
       const result = await getSharedImage(token);
-
-      console.log("API Result:", result);
 
       if (result.success === true) {
         setImage(result.image);
         setShareLink(result.shareLink);
         setRequiresLogin(false);
-        console.log("Image loaded successfully!");
       } else {
         if (result.requiresLogin === true) {
-          console.log("Login required - showing login screen");
           setRequiresLogin(true);
           setError("Login required to view this image");
         } else {
@@ -84,9 +64,7 @@ const SharedImage = () => {
         }
       }
     } catch (err) {
-      console.error("Error loading shared image:", err);
       if (!isAuthenticated) {
-        console.log("Not authenticated - showing login screen");
         setRequiresLogin(true);
         setError("Login required to view this image");
       } else {
@@ -98,14 +76,12 @@ const SharedImage = () => {
   };
 
   const handleLoginClick = () => {
-    console.log("=== Login button clicked ===");
     const redirectUrl = `/shared/${token}`;
     sessionStorage.setItem("redirectAfterLogin", redirectUrl);
     window.location.href = "/login";
   };
 
   const handleSignupClick = () => {
-    console.log("=== Signup button clicked ===");
     const redirectUrl = `/shared/${token}`;
     sessionStorage.setItem("redirectAfterLogin", redirectUrl);
     window.location.href = "/signup";
@@ -113,7 +89,6 @@ const SharedImage = () => {
 
   // Show login required screen
   if (requiresLogin && !isAuthenticated) {
-    console.log("Rendering login required screen");
     return (
       <div style={styles.container}>
         <div style={styles.loginRequiredCard}>
@@ -147,7 +122,6 @@ const SharedImage = () => {
   }
 
   if (error || !image) {
-    console.log("Rendering error state:", error);
     return (
       <div style={styles.container}>
         <div style={styles.errorCard}>

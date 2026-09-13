@@ -9,8 +9,6 @@ import SharedImage from "./pages/SharedImage";
 // This is a completely separate app that ONLY handles shared images
 // No redirects, no ProtectedRoute, no RootRedirect
 const SharedApp = () => {
-  console.log("=== SharedApp Rendered ===");
-
   return (
     <BrowserRouter>
       <AuthProvider>

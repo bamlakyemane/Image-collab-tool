@@ -25,10 +25,9 @@ const authMiddleware = (req, res, next) => {
 
     // Add userId to request object
     req.userId = decoded.userId;
-    console.log("Auth middleware - User authenticated:", req.userId);
+
     next();
   } catch (error) {
-    console.error("Auth middleware error:", error.message);
     // On error, continue without user
     req.userId = null;
     next();

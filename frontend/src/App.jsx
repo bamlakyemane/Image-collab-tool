@@ -22,8 +22,6 @@ const RootRedirect = () => {
 };
 
 function App() {
-  console.log("App - Rendering routes");
-
   return (
     <BrowserRouter>
       <AuthProvider>

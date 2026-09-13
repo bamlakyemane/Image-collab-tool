@@ -9,20 +9,16 @@ let globalListeners = {};
 
 export const initializeSocket = (token) => {
   if (socket && socket.connected) {
-    console.log("✅ Socket already connected");
     isInitialized = true;
     return socket;
   }
 
   if (socket) {
-    console.log("🔄 Reconnecting existing socket...");
     socket.connect();
     return socket;
   }
 
   const authToken = token || localStorage.getItem("token");
-  console.log("🆕 Creating new socket connection...");
-  console.log("🔑 Token present:", !!authToken);
 
   socket = io("https://image-collab-tool-api.onrender.com", {
     auth: {
@@ -36,7 +32,6 @@ export const initializeSocket = (token) => {
   });
 
   socket.on("connect", () => {
-    console.log("✅ Socket connected successfully! ID:", socket.id);
     isInitialized = true;
     // Re-apply any global listeners
     Object.keys(globalListeners).forEach((event) => {
@@ -46,17 +41,13 @@ export const initializeSocket = (token) => {
     });
   });
 
-  socket.on("welcome", (data) => {
-    console.log("👋 Welcome message from server:", data);
-  });
+  socket.on("welcome", (data) => {});
 
   socket.on("disconnect", (reason) => {
-    console.log("❌ Socket disconnected:", reason);
     isInitialized = false;
   });
 
   socket.on("connect_error", (error) => {
-    console.error("❌ Socket connection error:", error.message);
     isInitialized = false;
   });
 
@@ -70,11 +61,9 @@ export const getSocket = () => {
 
   const token = localStorage.getItem("token");
   if (token) {
-    console.log("📡 Initializing socket with token from localStorage");
     return initializeSocket(token);
   }
 
-  console.warn("⚠️ No socket available and no token found");
   return null;
 };
 
@@ -104,16 +93,14 @@ export const removeListener = (event, callback) => {
 
 export const joinImageRoom = (imageId) => {
   if (!socket || !socket.connected) {
-    console.warn("⚠️ Cannot join room - socket not connected");
     return false;
   }
 
   try {
     socket.emit("join-image", imageId);
-    console.log(`✅ Joined room: image-${imageId}`);
+
     return true;
   } catch (error) {
-    console.error("❌ Failed to join room:", error);
     return false;
   }
 };
@@ -125,10 +112,9 @@ export const leaveImageRoom = (imageId) => {
 
   try {
     socket.emit("leave-image", imageId);
-    console.log(`✅ Left room: image-${imageId}`);
+
     return true;
   } catch (error) {
-    console.error("❌ Failed to leave room:", error);
     return false;
   }
 };
@@ -138,7 +124,6 @@ export const disconnectSocket = () => {
     socket.disconnect();
     socket = null;
     isInitialized = false;
-    console.log("📡 Socket disconnected manually");
   }
 };
 

@@ -39,7 +39,6 @@ const getStats = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Get stats error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch stats",
@@ -98,7 +97,6 @@ const getUsers = async (req, res) => {
       totalPages: Math.ceil(total / parseInt(limit)),
     });
   } catch (error) {
-    console.error("Get users error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch users",
@@ -112,11 +110,6 @@ const updateUserRole = async (req, res) => {
     const { userId } = req.params;
     const { role } = req.body;
     const adminId = req.userId;
-
-    console.log("=== updateUserRole ===");
-    console.log("adminId:", adminId);
-    console.log("targetUserId:", userId);
-    console.log("requested role:", role);
 
     const validRoles = ["user", "moderator", "admin", "super_admin"];
     if (!validRoles.includes(role)) {
@@ -138,8 +131,6 @@ const updateUserRole = async (req, res) => {
         message: "Admin not found",
       });
     }
-
-    console.log("Admin role in DB:", admin.role);
 
     // Check if target user exists
     const targetUser = await prisma.user.findUnique({
@@ -197,14 +188,10 @@ const updateUserRole = async (req, res) => {
           },
         });
       } else {
-        console.log("⚠️ No image found for activity log, skipping");
       }
     } catch (activityError) {
       // Don't fail the main request if activity logging fails
-      console.warn("⚠️ Activity logging failed:", activityError.message);
     }
-
-    console.log("✅ User role updated successfully");
 
     res.json({
       success: true,
@@ -212,7 +199,6 @@ const updateUserRole = async (req, res) => {
       message: `User role updated to ${role}`,
     });
   } catch (error) {
-    console.error("❌ Update user role error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to update user role",
@@ -289,9 +275,7 @@ const toggleUserBan = async (req, res) => {
           },
         });
       }
-    } catch (activityError) {
-      console.warn("⚠️ Activity logging failed:", activityError.message);
-    }
+    } catch (activityError) {}
 
     res.json({
       success: true,
@@ -301,7 +285,6 @@ const toggleUserBan = async (req, res) => {
         : "User unbanned successfully",
     });
   } catch (error) {
-    console.error("Toggle user ban error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to update user status",
@@ -377,9 +360,7 @@ const getReports = async (req, res) => {
               });
               break;
           }
-        } catch (e) {
-          console.error("Error fetching target:", e);
-        }
+        } catch (e) {}
         return { ...report, target };
       }),
     );
@@ -392,7 +373,6 @@ const getReports = async (req, res) => {
       totalPages: Math.ceil(total / parseInt(limit)),
     });
   } catch (error) {
-    console.error("Get reports error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch reports",
@@ -458,7 +438,6 @@ const createReport = async (req, res) => {
       message: "Report submitted successfully",
     });
   } catch (error) {
-    console.error("Create report error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to create report",
@@ -550,7 +529,6 @@ const resolveReport = async (req, res) => {
       message: `Report ${action === "dismiss" ? "dismissed" : "resolved"} successfully`,
     });
   } catch (error) {
-    console.error("Resolve report error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to resolve report",
@@ -564,8 +542,6 @@ const deleteImage = async (req, res) => {
     const { imageId } = req.params;
     const userId = req.userId;
 
-    console.log(`🛠️ Admin deleting image ${imageId} by user ${userId}`);
-
     // Find the image first
     const image = await prisma.image.findUnique({
       where: { id: parseInt(imageId) },
@@ -577,8 +553,6 @@ const deleteImage = async (req, res) => {
         message: "Image not found",
       });
     }
-
-    console.log(`📸 Image found: ${image.fileName}, fileUrl: ${image.fileUrl}`);
 
     // ✅ STEP 1: Get a valid imageId for activity logging
     const anyImage = await prisma.image.findFirst({
@@ -595,12 +569,9 @@ const deleteImage = async (req, res) => {
             imageId: anyImage.id, // Use any valid image ID
           },
         });
-        console.log("✅ Activity logged");
       } else {
-        console.log("⚠️ No image found for activity log, skipping");
       }
     } catch (activityError) {
-      console.warn("⚠️ Activity logging failed:", activityError.message);
       // Continue with deletion even if logging fails
     }
 
@@ -612,23 +583,19 @@ const deleteImage = async (req, res) => {
     const filePath = path.join(uploadsDir, fileName);
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
-      console.log("✅ File deleted from disk");
     } else {
-      console.log("⚠️ File not found on disk, skipping deletion");
     }
 
     // ✅ STEP 4: Delete the image record from database
     await prisma.image.delete({
       where: { id: parseInt(imageId) },
     });
-    console.log("✅ Image record deleted from database");
 
     res.json({
       success: true,
       message: "Image deleted successfully",
     });
   } catch (error) {
-    console.error("❌ Admin delete image error DETAILS:", error);
     res.status(500).json({
       success: false,
       message: "Failed to delete image",
@@ -640,8 +607,6 @@ const deleteComment = async (req, res) => {
   try {
     const { commentId } = req.params;
     const userId = req.userId;
-
-    console.log(`🛠️ Admin deleting comment ${commentId} by user ${userId}`);
 
     const comment = await prisma.comment.findUnique({
       where: { id: parseInt(commentId) },
@@ -657,7 +622,6 @@ const deleteComment = async (req, res) => {
     await prisma.comment.delete({
       where: { id: parseInt(commentId) },
     });
-    console.log("✅ Comment deleted from database");
 
     await prisma.activity.create({
       data: {
@@ -672,7 +636,6 @@ const deleteComment = async (req, res) => {
       message: "Comment deleted successfully",
     });
   } catch (error) {
-    console.error("❌ Admin delete comment error DETAILS:", error);
     res.status(500).json({
       success: false,
       message: "Failed to delete comment",
@@ -732,7 +695,6 @@ const getAllImages = async (req, res) => {
       totalPages: Math.ceil(total / parseInt(limit)),
     });
   } catch (error) {
-    console.error("Get all images error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch images",
@@ -780,11 +742,8 @@ const bulkDeleteImages = async (req, res) => {
             imageId: anyImage.id,
           },
         });
-        console.log("✅ Activity logged");
       }
-    } catch (activityError) {
-      console.warn("⚠️ Activity logging failed:", activityError.message);
-    }
+    } catch (activityError) {}
 
     // Delete files from disk
     const fs = require("fs");
@@ -810,7 +769,6 @@ const bulkDeleteImages = async (req, res) => {
       message: `${images.length} images deleted successfully`,
     });
   } catch (error) {
-    console.error("Bulk delete images error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to delete images",
@@ -865,7 +823,6 @@ const getActivityLogs = async (req, res) => {
       totalPages: Math.ceil(total / parseInt(limit)),
     });
   } catch (error) {
-    console.error("Get activity logs error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch activity logs",

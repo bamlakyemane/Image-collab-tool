@@ -89,7 +89,6 @@ const createPin = async (req, res) => {
       message: "Comment added successfully",
     });
   } catch (error) {
-    console.error("Create pin error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to add comment",
@@ -169,7 +168,6 @@ const addComment = async (req, res) => {
       message: "Reply added successfully",
     });
   } catch (error) {
-    console.error("Add comment error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to add reply",
@@ -255,7 +253,6 @@ const togglePinStatus = async (req, res) => {
       message: `Pin ${updatedPin.isResolved ? "resolved" : "reopened"} successfully`,
     });
   } catch (error) {
-    console.error("Toggle pin status error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to update pin status",
@@ -305,7 +302,6 @@ const getPins = async (req, res) => {
       pins,
     });
   } catch (error) {
-    console.error("Get pins error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch comments",

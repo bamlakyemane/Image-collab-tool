@@ -34,7 +34,6 @@ const Library = () => {
         setImages(result.images);
       }
     } catch (err) {
-      console.error("Failed to load images:", err);
       setError("Failed to load images");
     } finally {
       setLoading(false);
@@ -66,7 +65,6 @@ const Library = () => {
         alert("Share link copied to clipboard!");
       }
     } catch (err) {
-      console.error("Failed to generate share link:", err);
       alert("Failed to generate share link");
     }
   };
@@ -80,7 +78,6 @@ const Library = () => {
         setImages(images.filter((img) => img.id !== imageId));
       }
     } catch (err) {
-      console.error("Failed to delete image:", err);
       alert("Failed to delete image");
     }
   };
@@ -124,7 +121,7 @@ const Library = () => {
     }
     return "Just now";
   };
-  console.log("Library - User role:", user?.role);
+
   console.log(
     "Library - Is admin?",
     user?.role === "admin" || user?.role === "super_admin",

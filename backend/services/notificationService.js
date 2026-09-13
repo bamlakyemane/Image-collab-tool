@@ -43,15 +43,10 @@ const sendNotification = async (toUser, eventType, data) => {
       html: html,
     });
 
-    console.log(`📧 Email sent to ${toUser.email} (${info.messageId})`);
-
     // For Ethereal, log the preview URL
     if (process.env.NODE_ENV !== "production" && nodemailer.getTestMessageUrl) {
-      console.log(`🔗 Preview: ${nodemailer.getTestMessageUrl(info)}`);
     }
-  } catch (error) {
-    console.error("❌ Failed to send email:", error);
-  }
+  } catch (error) {}
 };
 
 // Get email subject
@@ -213,9 +208,7 @@ const notifyThreadParticipants = async (
     console.log(
       `📬 Notified ${participantMap.size} participant(s) for pin ${pinId}`,
     );
-  } catch (error) {
-    console.error("❌ Error notifying participants:", error);
-  }
+  } catch (error) {}
 };
 
 module.exports = {

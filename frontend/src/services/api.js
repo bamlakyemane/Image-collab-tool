@@ -11,14 +11,10 @@ const API = axios.create({
 API.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
-    console.log("API Interceptor - Token:", token);
-    console.log("API Interceptor - Config URL:", config.url);
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      console.log("API Interceptor - Added Authorization header");
     } else {
-      console.log("API Interceptor - No token found");
     }
     return config;
   },
@@ -30,13 +26,9 @@ API.interceptors.request.use(
 // Add a response interceptor
 API.interceptors.response.use(
   (response) => {
-    console.log("API Response - Status:", response.status);
-    console.log("API Response - URL:", response.config.url);
     return response;
   },
   (error) => {
-    console.error("API Error:", error.response?.status, error.response?.data);
-
     // Only redirect to login for 401 errors that are NOT from the shared image endpoint
     const isSharedRoute = error.config?.url?.includes("/shared/");
 

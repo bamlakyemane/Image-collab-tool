@@ -110,7 +110,6 @@ const ImageUpload = ({ onUploadSuccess }) => {
         setError(result.message || "Upload failed");
       }
     } catch (err) {
-      console.error("Upload error:", err);
       setError("Failed to upload images. Please try again.");
     } finally {
       setUploading(false);

@@ -23,8 +23,6 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
-console.log("✅ CORS allowed origins:", allowedOrigins);
-
 // ✅ ONLY ONE CORS MIDDLEWARE - This is the correct one!
 app.use(
   cors({
@@ -35,7 +33,6 @@ app.use(
       if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        console.log("❌ CORS blocked:", origin);
         callback(new Error("Not allowed by CORS"));
       }
     },
@@ -77,14 +74,11 @@ const io = new Server(server, {
 
 // Socket.IO connection handling
 io.on("connection", (socket) => {
-  console.log("✅ New client connected:", socket.id);
-  console.log("📡 Total connections:", io.engine.clientsCount);
-
   socket.emit("welcome", { message: "Connected to server!" });
 
   socket.on("join-image", (imageId) => {
     socket.join(`image-${imageId}`);
-    console.log(`📌 Socket ${socket.id} joined image-${imageId}`);
+
     console.log(
       `📌 Room image-${imageId} has ${io.sockets.adapter.rooms.get(`image-${imageId}`)?.size || 0} clients`,
     );
@@ -92,19 +86,14 @@ io.on("connection", (socket) => {
 
   socket.on("leave-image", (imageId) => {
     socket.leave(`image-${imageId}`);
-    console.log(`📌 Socket ${socket.id} left image-${imageId}`);
   });
 
   socket.on("new-comment", (data) => {
-    console.log(`💬 New comment event received for image-${data.imageId}`);
     socket.to(`image-${data.imageId}`).emit("comment-added", data);
-    console.log(`💬 Comment broadcast to image-${data.imageId}`);
   });
 
   socket.on("new-pin", (data) => {
-    console.log(`📌 New pin event received for image-${data.imageId}`);
     socket.to(`image-${data.imageId}`).emit("pin-added", data);
-    console.log(`📌 Pin broadcast to image-${data.imageId}`);
   });
 
   socket.on("pin-resolved", (data) => {
@@ -112,17 +101,11 @@ io.on("connection", (socket) => {
       `🔄 Pin status change event received for image-${data.imageId}`,
     );
     socket.to(`image-${data.imageId}`).emit("pin-status-changed", data);
-    console.log(`🔄 Status change broadcast to image-${data.imageId}`);
   });
 
-  socket.on("disconnect", (reason) => {
-    console.log(`❌ Client disconnected: ${socket.id}, reason: ${reason}`);
-    console.log("📡 Total connections:", io.engine.clientsCount);
-  });
+  socket.on("disconnect", (reason) => {});
 
-  socket.on("error", (error) => {
-    console.error("❌ Socket error:", error);
-  });
+  socket.on("error", (error) => {});
 });
 
 // Make io accessible to routes
@@ -130,14 +113,9 @@ app.set("io", io);
 
 // Start server
 server.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
-  console.log(`🔗 Auth routes available at http://localhost:${PORT}/api/auth`);
   console.log(
     `🔗 Image routes available at http://localhost:${PORT}/api/images`,
   );
-  console.log(`🔗 Socket.IO server running on port ${PORT}`);
 });
 
-server.on("error", (error) => {
-  console.error("❌ Server error:", error);
-});
+server.on("error", (error) => {});

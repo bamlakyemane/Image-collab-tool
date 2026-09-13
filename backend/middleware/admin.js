@@ -34,17 +34,14 @@ const isAdmin = async (req, res, next) => {
 
     // ✅ Use includes to match both 'admin' and 'super_admin'
     if (!user.role.includes("admin")) {
-      console.log(`Admin access denied for user ${userId}, role: ${user.role}`);
       return res.status(403).json({
         success: false,
         message: "Admin access required",
       });
     }
 
-    console.log(`Admin access granted for user ${userId}, role: ${user.role}`);
     next();
   } catch (error) {
-    console.error("Admin middleware error:", error);
     res.status(500).json({
       success: false,
       message: "Server error",
@@ -84,7 +81,6 @@ const isSuperAdmin = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.error("Super admin middleware error:", error);
     res.status(500).json({
       success: false,
       message: "Server error",
