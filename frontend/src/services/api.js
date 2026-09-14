@@ -1,7 +1,7 @@
 // frontend/src/services/api.js
 
 import axios from "axios";
-import { API_URL } from "../config"; // ✅ Use named import
+import { API_URL } from "../config"; // ✅ named import
 
 const API = axios.create({
   baseURL: API_URL,
@@ -21,12 +21,11 @@ API.interceptors.request.use(
   },
 );
 
-// Add a response interceptor to handle token expiration
+// Add a response interceptor
 API.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Only redirect for non-shared routes
       const isSharedRoute = error.config?.url?.includes("/shared/");
       if (!isSharedRoute) {
         localStorage.removeItem("token");

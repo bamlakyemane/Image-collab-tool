@@ -10,11 +10,6 @@ export const API_URL =
 export const SOCKET_URL =
   import.meta.env.VITE_SOCKET_URL || "http://localhost:5000";
 
-// ✅ Add default export to support BOTH import styles
-const config = {
-  BACKEND_URL,
-  API_URL,
-  SOCKET_URL,
-};
-
+// ✅ Default export (for compatibility)
+const config = { BACKEND_URL, API_URL, SOCKET_URL };
 export default config;

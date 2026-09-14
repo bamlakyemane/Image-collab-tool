@@ -1,7 +1,7 @@
 // frontend/src/services/socket.js
 
 import { io } from "socket.io-client";
-import { SOCKET_URL } from "../config"; // ✅ Use named import
+import { SOCKET_URL } from "../config";
 
 let socket = null;
 let isInitialized = false;
@@ -21,9 +21,7 @@ export const initializeSocket = (token) => {
   const authToken = token || localStorage.getItem("token");
 
   socket = io(SOCKET_URL, {
-    auth: {
-      token: authToken,
-    },
+    auth: { token: authToken },
     transports: ["websocket", "polling"],
     reconnection: true,
     reconnectionAttempts: 5,
@@ -53,15 +51,9 @@ export const initializeSocket = (token) => {
 };
 
 export const getSocket = () => {
-  if (socket && socket.connected) {
-    return socket;
-  }
-
+  if (socket && socket.connected) return socket;
   const token = localStorage.getItem("token");
-  if (token) {
-    return initializeSocket(token);
-  }
-
+  if (token) return initializeSocket(token);
   return null;
 };
 
@@ -70,10 +62,7 @@ export const registerListener = (event, callback) => {
     globalListeners[event] = [];
   }
   globalListeners[event].push(callback);
-
-  if (socket) {
-    socket.on(event, callback);
-  }
+  if (socket) socket.on(event, callback);
 };
 
 export const removeListener = (event, callback) => {
@@ -82,23 +71,17 @@ export const removeListener = (event, callback) => {
       (cb) => cb !== callback,
     );
   }
-  if (socket) {
-    socket.off(event, callback);
-  }
+  if (socket) socket.off(event, callback);
 };
 
 export const joinImageRoom = (imageId) => {
-  if (!socket || !socket.connected) {
-    return false;
-  }
+  if (!socket || !socket.connected) return false;
   socket.emit("join-image", imageId);
   return true;
 };
 
 export const leaveImageRoom = (imageId) => {
-  if (!socket || !socket.connected) {
-    return false;
-  }
+  if (!socket || !socket.connected) return false;
   socket.emit("leave-image", imageId);
   return true;
 };
