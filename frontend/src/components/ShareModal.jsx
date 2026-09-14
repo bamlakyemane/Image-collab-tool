@@ -8,6 +8,10 @@ import {
   getShareLinks,
 } from "../services/imageService";
 
+const BACKEND_URL = import.meta.env.VITE_API_URL
+  ? import.meta.env.VITE_API_URL.replace("/api", "")
+  : "http://localhost:5000";
+
 const ShareModal = ({ image, onClose, onUpdate }) => {
   const [expirationDate, setExpirationDate] = useState("");
   const [requiresLogin, setRequiresLogin] = useState(true);
@@ -142,7 +146,7 @@ const ShareModal = ({ image, onClose, onUpdate }) => {
         <div style={styles.body}>
           <div style={styles.imageInfo}>
             <img
-              src=src={`${BACKEND_URL}${image.fileUrl}`}
+              src={`${BACKEND_URL}${image.fileUrl}`}
               alt={image.fileName}
               style={styles.thumbnail}
             />
