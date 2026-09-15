@@ -3,6 +3,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Library from "./pages/Library";
@@ -26,6 +27,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
+          <Route path="/" element={<Home />} />
           {/* Public routes */}
           <Route path="/shared/:token" element={<SharedImage />} />
           <Route path="/login" element={<Login />} />
