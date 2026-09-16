@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import PasswordInput from "../components/PasswordInput";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -100,13 +101,13 @@ const Signup = () => {
 
           <div style={styles.inputGroup}>
             <label style={styles.label}>Password</label>
-            <input
-              type="password"
+            <PasswordInput
+              id="signup-password"
+              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
-              style={styles.input}
               placeholder="••••••••"
+              required={true}
               minLength={6}
             />
             <span style={styles.hint}>Must be at least 6 characters</span>
@@ -114,13 +115,13 @@ const Signup = () => {
 
           <div style={styles.inputGroup}>
             <label style={styles.label}>Confirm Password</label>
-            <input
-              type="password"
+            <PasswordInput
+              id="signup-confirm-password"
+              name="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              style={styles.input}
               placeholder="••••••••"
+              required={true}
               minLength={6}
             />
           </div>

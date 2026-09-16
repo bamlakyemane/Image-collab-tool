@@ -3,6 +3,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import ScrollAnimation from "../components/ScrollAnimation";
+import "../styles/animations.css";
 
 const Home = () => {
   const { isAuthenticated } = useAuth();
@@ -18,14 +20,17 @@ const Home = () => {
           <div style={styles.navLinks}>
             {isAuthenticated ? (
               <Link to="/library" style={styles.primaryBtn}>
-                Go to Library
+                Go to Library →
               </Link>
             ) : (
               <>
                 <Link to="/login" style={styles.secondaryBtn}>
                   Log In
                 </Link>
-                <Link to="/signup" style={styles.primaryBtn}>
+                <Link
+                  to="/signup"
+                  style={{ ...styles.primaryBtn, ...styles.btnShine }}
+                >
                   Sign Up
                 </Link>
               </>
@@ -38,184 +43,221 @@ const Home = () => {
       <section style={styles.hero}>
         <div style={styles.heroContent}>
           <div style={styles.heroText}>
-            <span style={styles.heroBadge}>
-              ✨ Real-time collaboration made simple
-            </span>
-            <h1 style={styles.heroTitle}>
-              Collaborate on Images,{" "}
-              <span style={styles.gradientText}>Together in Real-Time</span>
-            </h1>
-            <p style={styles.heroSubtitle}>
-              Share images, pin comments on exact spots, and collaborate with
-              your team instantly. No more back-and-forth emails or messy group
-              chats.
-            </p>
-            <div style={styles.heroButtons}>
-              <Link to="/signup" style={styles.heroCta}>
-                Get Started Free →
-              </Link>
-              <Link to="/login" style={styles.heroSecondary}>
-                Sign In
-              </Link>
-            </div>
-            <div style={styles.heroStats}>
-              <div style={styles.stat}>
-                <span style={styles.statNumber}>Real-time</span>
-                <span style={styles.statLabel}>Live updates</span>
+            <ScrollAnimation animation="fade-up" delay={100}>
+              <span style={styles.heroBadge}>
+                ✨ Real-time collaboration made simple
+              </span>
+            </ScrollAnimation>
+
+            <ScrollAnimation animation="fade-up" delay={200}>
+              <h1 style={styles.heroTitle}>
+                Collaborate on Images,{" "}
+                <span className="animate-gradient" style={styles.gradientText}>
+                  Together in Real-Time
+                </span>
+              </h1>
+            </ScrollAnimation>
+
+            <ScrollAnimation animation="fade-up" delay={300}>
+              <p style={styles.heroSubtitle}>
+                Share images, pin comments on exact spots, and collaborate with
+                your team instantly. No more back-and-forth emails or messy
+                group chats.
+              </p>
+            </ScrollAnimation>
+
+            <ScrollAnimation animation="fade-up" delay={400}>
+              <div style={styles.heroButtons}>
+                <Link
+                  to="/signup"
+                  style={{ ...styles.heroCta, ...styles.btnShine }}
+                  className="hover-scale"
+                >
+                  Get Started Free →
+                </Link>
+                <Link
+                  to="/login"
+                  style={styles.heroSecondary}
+                  className="hover-scale"
+                >
+                  Sign In
+                </Link>
               </div>
-              <div style={styles.stat}>
-                <span style={styles.statNumber}>Pin-based</span>
-                <span style={styles.statLabel}>Exact spot comments</span>
+            </ScrollAnimation>
+
+            <ScrollAnimation animation="fade-up" delay={500}>
+              <div style={styles.heroStats}>
+                <div style={styles.stat}>
+                  <span style={styles.statNumber}>Real-time</span>
+                  <span style={styles.statLabel}>Live updates</span>
+                </div>
+                <div style={styles.stat}>
+                  <span style={styles.statNumber}>Pin-based</span>
+                  <span style={styles.statLabel}>Exact spot comments</span>
+                </div>
+                <div style={styles.stat}>
+                  <span style={styles.statNumber}>Secure</span>
+                  <span style={styles.statLabel}>Shareable links</span>
+                </div>
               </div>
-              <div style={styles.stat}>
-                <span style={styles.statNumber}>Secure</span>
-                <span style={styles.statLabel}>Shareable links</span>
-              </div>
-            </div>
+            </ScrollAnimation>
           </div>
 
           {/* Hero Image Mockup */}
-          <div style={styles.heroImage}>
-            <div style={styles.mockup}>
-              <div style={styles.mockupHeader}>
-                <span style={styles.dot}></span>
-                <span style={styles.dot}></span>
-                <span style={styles.dot}></span>
-              </div>
-              <div style={styles.mockupBody}>
-                <div style={styles.mockupImage}>
-                  <div style={styles.pin} title="Comment pin">
-                    1
-                  </div>
-                  <div style={styles.pin2} title="Comment pin">
-                    2
-                  </div>
+          <ScrollAnimation animation="fade-left" delay={300}>
+            <div style={styles.heroImage}>
+              <div style={styles.mockup} className="animate-float-slow">
+                <div style={styles.mockupHeader}>
+                  <span style={styles.dot}></span>
+                  <span style={styles.dot}></span>
+                  <span style={styles.dot}></span>
                 </div>
-                <div style={styles.mockupSidebar}>
-                  <div style={styles.mockupComment}>
-                    <strong>Jane:</strong> Love this design!
+                <div style={styles.mockupBody}>
+                  <div style={styles.mockupImage}>
+                    <div style={styles.pin} className="animate-pulse-custom">
+                      1
+                    </div>
+                    <div style={styles.pin2} className="animate-pulse-custom">
+                      2
+                    </div>
                   </div>
-                  <div style={styles.mockupComment}>
-                    <strong>John:</strong> Can we change the color?
-                  </div>
-                  <div style={styles.mockupComment}>
-                    <strong>Jane:</strong> Sure, on it! ✨
+                  <div style={styles.mockupSidebar}>
+                    <div style={styles.mockupComment}>
+                      <strong>Jane:</strong> Love this design!
+                    </div>
+                    <div style={styles.mockupComment}>
+                      <strong>John:</strong> Can we change the color?
+                    </div>
+                    <div style={styles.mockupComment}>
+                      <strong>Jane:</strong> Sure, on it! ✨
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* ===== FEATURES SECTION ===== */}
       <section style={styles.features}>
-        <div style={styles.sectionHeader}>
-          <h2 style={styles.sectionTitle}>Everything You Need</h2>
-          <p style={styles.sectionSubtitle}>
-            Powerful features for seamless image collaboration
-          </p>
-        </div>
+        <ScrollAnimation animation="fade-up">
+          <div style={styles.sectionHeader}>
+            <h2 style={styles.sectionTitle}>Everything You Need</h2>
+            <p style={styles.sectionSubtitle}>
+              Powerful features for seamless image collaboration
+            </p>
+          </div>
+        </ScrollAnimation>
 
         <div style={styles.featuresGrid}>
-          <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>📌</div>
-            <h3 style={styles.featureTitle}>Pin-Based Comments</h3>
-            <p style={styles.featureDesc}>
-              Click anywhere on an image to leave a comment exactly where it
-              matters.
-            </p>
-          </div>
-
-          <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>⚡</div>
-            <h3 style={styles.featureTitle}>Real-Time Updates</h3>
-            <p style={styles.featureDesc}>
-              See comments and replies appear instantly without refreshing the
-              page.
-            </p>
-          </div>
-
-          <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>🔗</div>
-            <h3 style={styles.featureTitle}>Shareable Links</h3>
-            <p style={styles.featureDesc}>
-              Generate secure links with expiration dates to share with anyone.
-            </p>
-          </div>
-
-          <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>📧</div>
-            <h3 style={styles.featureTitle}>Email Notifications</h3>
-            <p style={styles.featureDesc}>
-              Get notified when someone comments or replies to your threads.
-            </p>
-          </div>
-
-          <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>🔍</div>
-            <h3 style={styles.featureTitle}>Search & Filters</h3>
-            <p style={styles.featureDesc}>
-              Find comments quickly with powerful search and filter options.
-            </p>
-          </div>
-
-          <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>👑</div>
-            <h3 style={styles.featureTitle}>Admin Controls</h3>
-            <p style={styles.featureDesc}>
-              Manage users, moderate content, and keep your platform safe.
-            </p>
-          </div>
+          {[
+            {
+              icon: "📌",
+              title: "Pin-Based Comments",
+              desc: "Click anywhere on an image to leave a comment exactly where it matters.",
+            },
+            {
+              icon: "⚡",
+              title: "Real-Time Updates",
+              desc: "See comments and replies appear instantly without refreshing the page.",
+            },
+            {
+              icon: "🔗",
+              title: "Shareable Links",
+              desc: "Generate secure links with expiration dates to share with anyone.",
+            },
+            {
+              icon: "📧",
+              title: "Email Notifications",
+              desc: "Get notified when someone comments or replies to your threads.",
+            },
+            {
+              icon: "🔍",
+              title: "Search & Filters",
+              desc: "Find comments quickly with powerful search and filter options.",
+            },
+            {
+              icon: "👑",
+              title: "Admin Controls",
+              desc: "Manage users, moderate content, and keep your platform safe.",
+            },
+          ].map((feature, index) => (
+            <ScrollAnimation
+              key={index}
+              animation="fade-up"
+              delay={index * 100}
+            >
+              <div style={styles.featureCard} className="hover-lift">
+                <div style={styles.featureIcon}>{feature.icon}</div>
+                <h3 style={styles.featureTitle}>{feature.title}</h3>
+                <p style={styles.featureDesc}>{feature.desc}</p>
+              </div>
+            </ScrollAnimation>
+          ))}
         </div>
       </section>
 
       {/* ===== HOW IT WORKS ===== */}
       <section style={styles.howItWorks}>
-        <div style={styles.sectionHeader}>
-          <h2 style={styles.sectionTitle}>How It Works</h2>
-          <p style={styles.sectionSubtitle}>Get started in 3 simple steps</p>
-        </div>
+        <ScrollAnimation animation="fade-up">
+          <div style={styles.sectionHeader}>
+            <h2 style={styles.sectionTitle}>How It Works</h2>
+            <p style={styles.sectionSubtitle}>Get started in 3 simple steps</p>
+          </div>
+        </ScrollAnimation>
 
         <div style={styles.stepsGrid}>
-          <div style={styles.stepCard}>
-            <div style={styles.stepNumber}>1</div>
-            <h3 style={styles.stepTitle}>Upload an Image</h3>
-            <p style={styles.stepDesc}>
-              Drag and drop your image into your library.
-            </p>
-          </div>
-
-          <div style={styles.stepCard}>
-            <div style={styles.stepNumber}>2</div>
-            <h3 style={styles.stepTitle}>Pin Comments</h3>
-            <p style={styles.stepDesc}>
-              Click anywhere on the image to leave feedback.
-            </p>
-          </div>
-
-          <div style={styles.stepCard}>
-            <div style={styles.stepNumber}>3</div>
-            <h3 style={styles.stepTitle}>Share & Collaborate</h3>
-            <p style={styles.stepDesc}>
-              Send the link to your team and collaborate live.
-            </p>
-          </div>
+          {[
+            {
+              num: "1",
+              title: "Upload an Image",
+              desc: "Drag and drop your image into your library.",
+            },
+            {
+              num: "2",
+              title: "Pin Comments",
+              desc: "Click anywhere on the image to leave feedback.",
+            },
+            {
+              num: "3",
+              title: "Share & Collaborate",
+              desc: "Send the link to your team and collaborate live.",
+            },
+          ].map((step, index) => (
+            <ScrollAnimation
+              key={index}
+              animation="zoom-in"
+              delay={index * 150}
+            >
+              <div style={styles.stepCard} className="hover-lift">
+                <div style={styles.stepNumber}>{step.num}</div>
+                <h3 style={styles.stepTitle}>{step.title}</h3>
+                <p style={styles.stepDesc}>{step.desc}</p>
+              </div>
+            </ScrollAnimation>
+          ))}
         </div>
       </section>
 
       {/* ===== CTA SECTION ===== */}
-      <section style={styles.ctaSection}>
-        <div style={styles.ctaContent}>
-          <h2 style={styles.ctaTitle}>Ready to Start Collaborating?</h2>
-          <p style={styles.ctaSubtitle}>
-            Join thousands of teams already using ImageCollab.
-          </p>
-          <Link to="/signup" style={styles.ctaButton}>
-            Get Started — It's Free →
-          </Link>
-        </div>
-      </section>
+      <ScrollAnimation animation="zoom-in">
+        <section style={styles.ctaSection}>
+          <div style={styles.ctaContent}>
+            <h2 style={styles.ctaTitle}>Ready to Start Collaborating?</h2>
+            <p style={styles.ctaSubtitle}>
+              Join thousands of teams already using ImageCollab.
+            </p>
+            <Link
+              to="/signup"
+              style={{ ...styles.ctaButton, ...styles.btnShine }}
+              className="hover-scale"
+            >
+              Get Started — It's Free →
+            </Link>
+          </div>
+        </section>
+      </ScrollAnimation>
 
       {/* ===== FOOTER ===== */}
       <footer style={styles.footer}>
@@ -246,7 +288,6 @@ const styles = {
     minHeight: "100vh",
     backgroundColor: "#ffffff",
   },
-
   // ===== NAVBAR =====
   navbar: {
     position: "sticky",
@@ -641,6 +682,10 @@ const styles = {
     color: "#666",
     fontSize: "13px",
     margin: 0,
+  },
+  btnShine: {
+    position: "relative",
+    overflow: "hidden",
   },
 };
 

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "../styles/buttons.css";
+import PasswordInput from "../components/PasswordInput";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -73,13 +74,13 @@ const Login = () => {
 
           <div style={styles.inputGroup}>
             <label style={styles.label}>Password</label>
-            <input
-              type="password"
+            <PasswordInput
+              id="login-password"
+              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
-              style={styles.input}
               placeholder="••••••••"
+              required={true}
               minLength={6}
             />
           </div>
