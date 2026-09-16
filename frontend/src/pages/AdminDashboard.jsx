@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 import { BACKEND_URL } from "../config";
+import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   const { user, logout } = useAuth();
@@ -155,7 +156,12 @@ const AdminDashboard = () => {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <h1 style={styles.title}>⚙️ Admin Dashboard</h1>
+        <div style={styles.headerLeft}>
+          <Link to="/library" style={styles.backBtn}>
+            ← Back to Library
+          </Link>
+          <h1 style={styles.title}>⚙️ Admin Dashboard</h1>
+        </div>
         <div style={styles.userInfo}>
           <span>Welcome, {user?.name}!</span>
           <button onClick={logout} style={styles.logoutBtn}>
@@ -713,6 +719,8 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     borderBottom: "1px solid #ddd",
+    flexWrap: "wrap",
+    gap: "10px",
   },
   title: {
     margin: 0,
@@ -944,6 +952,24 @@ const styles = {
     textAlign: "center",
     color: "#999",
     padding: "40px",
+  },
+  headerLeft: {
+    display: "flex",
+    alignItems: "center",
+    gap: "20px",
+  },
+  backBtn: {
+    padding: "8px 16px",
+    backgroundColor: "#f1f3f5",
+    color: "#333",
+    textDecoration: "none",
+    borderRadius: "6px",
+    fontSize: "14px",
+    fontWeight: "500",
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+    transition: "all 0.2s",
   },
 };
 
