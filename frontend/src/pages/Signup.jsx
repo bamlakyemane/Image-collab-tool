@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import PasswordInput from "../components/PasswordInput";
+import { showSuccess, showError } from "../utils/toast";
 
 const Signup = () => {
   const [name, setName] = useState("");
