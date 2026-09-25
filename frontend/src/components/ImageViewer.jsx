@@ -18,6 +18,7 @@ import {
 } from "../services/commentService";
 import CommentSearch from "./CommentSearch";
 import { BACKEND_URL } from "../config";
+import { showSuccess, showError } from "../utils/toast";
 
 const ImageViewer = ({ imageId, imageUrl }) => {
   const { user, isAuthenticated } = useAuth();
@@ -101,12 +102,15 @@ const ImageViewer = ({ imageId, imageUrl }) => {
         setPins((prevPins) => {
           const exists = prevPins.some((p) => p.id === data.pin.id);
           if (exists) return prevPins;
-          forceUpdate.current += 1;
           return [data.pin, ...prevPins];
         });
+        // ✅ Show toast for real-time updates
+        if (data.user && data.user.id !== user?.id) {
+          showSuccess(`${data.user.name} added a comment`);
+        }
       }
     },
-    [imageId],
+    [imageId, user],
   );
 
   const handleCommentAdded = useCallback(
@@ -237,7 +241,7 @@ const ImageViewer = ({ imageId, imageUrl }) => {
         }
       }
     } catch (error) {
-      alert("Failed to add comment. Please try again.");
+      showError("Failed to add comment. Please try again.");
     }
   };
 
@@ -273,7 +277,7 @@ const ImageViewer = ({ imageId, imageUrl }) => {
         }
       }
     } catch (error) {
-      alert("Failed to add reply. Please try again.");
+      showError("Failed to add reply. Please try again.");
     }
   };
 
@@ -300,7 +304,7 @@ const ImageViewer = ({ imageId, imageUrl }) => {
         }
       }
     } catch (error) {
-      alert("Failed to update pin status. Please try again.");
+      showError("Failed to update pin status. Please try again.");
     }
   };
 

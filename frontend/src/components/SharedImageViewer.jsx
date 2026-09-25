@@ -18,6 +18,7 @@ import {
 } from "../services/commentService";
 import CommentSearch from "./CommentSearch";
 import { BACKEND_URL } from "../config";
+import { showSuccess, showError } from "../utils/toast";
 
 const SharedImageViewer = ({ imageId, imageUrl, initialPins = [] }) => {
   const { user, isAuthenticated } = useAuth();
@@ -239,7 +240,7 @@ const SharedImageViewer = ({ imageId, imageUrl, initialPins = [] }) => {
         }
       }
     } catch (error) {
-      alert("Failed to add comment. Please try again.");
+      showError("Failed to add comment. Please try again.");
     }
   };
 
@@ -275,7 +276,7 @@ const SharedImageViewer = ({ imageId, imageUrl, initialPins = [] }) => {
         }
       }
     } catch (error) {
-      alert("Failed to add reply. Please try again.");
+      showError("Failed to add reply. Please try again.");
     }
   };
 
@@ -304,7 +305,7 @@ const SharedImageViewer = ({ imageId, imageUrl, initialPins = [] }) => {
         }
       }
     } catch (error) {
-      alert("Failed to update pin status. Please try again.");
+      showError("Failed to update pin status. Please try again.");
     }
   };
 

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 import { BACKEND_URL } from "../config";
 import { Link } from "react-router-dom";
+import { showSuccess, showError, showWarning } from "../utils/toast";
 
 const AdminDashboard = () => {
   const { user, logout } = useAuth();
@@ -66,7 +67,7 @@ const AdminDashboard = () => {
   // Bulk delete images
   const handleBulkDeleteImages = async () => {
     if (selectedImages.length === 0) {
-      alert("Please select at least one image");
+      showError("Please select at least one image");
       return;
     }
     if (!confirm(`Delete ${selectedImages.length} selected images?`)) return;
@@ -78,10 +79,10 @@ const AdminDashboard = () => {
       if (response.data.success) {
         fetchData();
         setSelectedImages([]);
-        alert(response.data.message);
+        showSuccess(response.data.message);
       }
     } catch (err) {
-      alert("Failed to delete images");
+      showError("Failed to delete images");
     }
   };
 
@@ -94,7 +95,7 @@ const AdminDashboard = () => {
         fetchData();
       }
     } catch (err) {
-      alert("Failed to delete image");
+      showError("Failed to delete image");
     }
   };
 
@@ -114,7 +115,7 @@ const AdminDashboard = () => {
         fetchData();
       }
     } catch (err) {
-      alert("Failed to update user status");
+      showError("Failed to update user status");
     }
   };
 
@@ -126,7 +127,7 @@ const AdminDashboard = () => {
         fetchData();
       }
     } catch (err) {
-      alert("Failed to update user role");
+      showError("Failed to update user role");
     }
   };
 
@@ -141,7 +142,7 @@ const AdminDashboard = () => {
         fetchData();
       }
     } catch (err) {
-      alert("Failed to resolve report");
+      showError("Failed to resolve report");
     }
   };
 

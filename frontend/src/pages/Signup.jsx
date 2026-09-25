@@ -36,27 +36,34 @@ const Signup = () => {
     setError("");
 
     if (password !== confirmPassword) {
+      showError("Passwords do not match");
       setError("Passwords do not match");
       return;
     }
 
     if (password.length < 6) {
+      showError("Password must be at least 6 characters");
       setError("Password must be at least 6 characters");
       return;
     }
 
     setLoading(true);
-    const result = await signup(name, email, password);
+    try {
+      const result = await signup(name, email, password);
 
-    if (result.success) {
-      sessionStorage.removeItem("redirectAfterLogin");
-      sessionStorage.removeItem("sharedToken");
-      navigate(from, { replace: true });
-    } else {
-      setError(result.message || "Signup failed. Please try again.");
+      if (result.success) {
+        showSuccess("Account created! Welcome 🎉");
+        navigate(from, { replace: true });
+      } else {
+        showError(result.message || "Signup failed. Please try again.");
+        setError(result.message || "Signup failed. Please try again.");
+      }
+    } catch (err) {
+      showError("Something went wrong. Please try again.");
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (

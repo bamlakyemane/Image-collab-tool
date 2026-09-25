@@ -1,10 +1,11 @@
 // frontend/src/pages/Library.jsx
 
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom"; // ← Link is needed for admin button
+import { useNavigate, Link } from "react-router-dom";
+import { showSuccess, showError } from "../utils/toast";
 import { useAuth } from "../context/AuthContext";
 import ImageUpload from "../components/ImageUpload";
-import ShareModal from "../components/ShareModal"; // ← ADD THIS
+import ShareModal from "../components/ShareModal";
 import {
   getUserImages,
   generateShareLink,
@@ -62,10 +63,10 @@ const Library = () => {
       const result = await generateShareLink(imageId);
       if (result.success) {
         await navigator.clipboard.writeText(result.shareUrl);
-        alert("Share link copied to clipboard!");
+        showSuccess("Share link copied to clipboard!");
       }
     } catch (err) {
-      alert("Failed to generate share link");
+      showError("Failed to generate share link");
     }
   };
 
@@ -78,7 +79,7 @@ const Library = () => {
         setImages(images.filter((img) => img.id !== imageId));
       }
     } catch (err) {
-      alert("Failed to delete image");
+      showError("Failed to delete image");
     }
   };
 

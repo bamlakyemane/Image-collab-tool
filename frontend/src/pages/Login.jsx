@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "../styles/buttons.css";
 import PasswordInput from "../components/PasswordInput";
+import { showSuccess, showError } from "../utils/toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -33,13 +34,15 @@ const Login = () => {
     const result = await login(email, password);
 
     if (result.success) {
+      showSuccess("Login successful! Welcome back 👋");
       const redirectPath = from;
       sessionStorage.removeItem("redirectAfterLogin");
       setTimeout(() => {
         navigate(redirectPath, { replace: true });
       }, 100);
     } else {
-      setError(result.message || "Login failed. Please try again.");
+      showError(result.message || "Login failed");
+      setError(result.message || "Login failed");
     }
 
     setLoading(false);
@@ -85,7 +88,6 @@ const Login = () => {
             />
           </div>
 
-          {/* ✅ BUTTON WITH CENTERED WRAPPER */}
           <div style={styles.buttonWrapper}>
             <button
               type="submit"

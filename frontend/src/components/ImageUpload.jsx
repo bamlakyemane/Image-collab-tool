@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { uploadMultipleImages } from "../services/imageService";
+import { showSuccess, showError } from "../utils/toast";
 
 const ImageUpload = ({ onUploadSuccess }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -105,7 +106,7 @@ const ImageUpload = ({ onUploadSuccess }) => {
           onUploadSuccess(result.images);
         }
 
-        alert(`Successfully uploaded ${result.count} images!`);
+        showSuccess(`Successfully uploaded ${result.count} images!`);
       } else {
         setError(result.message || "Upload failed");
       }
