@@ -7,16 +7,15 @@ class User {
   // Create a new user
   static async create(userData) {
     const { name, email, password } = userData;
+    const normalizedEmail = email.toLowerCase().trim(); // ✅ lowercase
 
-    // Hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create user in database
     const user = await prisma.user.create({
       data: {
         name,
-        email,
+        email: normalizedEmail, // ✅ Saved lowercase
         password: hashedPassword,
         notificationPreferences: {
           newThread: true,
@@ -31,8 +30,10 @@ class User {
 
   // Find user by email
   static async findByEmail(email) {
+    const normalizedEmail = email.toLowerCase().trim();
+
     return await prisma.user.findUnique({
-      where: { email },
+      where: { email: normalizedEmail },
     });
   }
 

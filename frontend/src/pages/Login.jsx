@@ -28,7 +28,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     setLoading(true);
 
     const result = await login(email, password);
@@ -42,7 +41,6 @@ const Login = () => {
       }, 100);
     } else {
       showError(result.message || "Login failed");
-      setError(result.message || "Login failed");
     }
 
     setLoading(false);
@@ -59,8 +57,6 @@ const Login = () => {
             🔒 Please log in to view the shared image
           </div>
         )}
-
-        {error && <div style={styles.error}>{error}</div>}
 
         <form onSubmit={handleSubmit} style={styles.form}>
           <div style={styles.inputGroup}>
@@ -213,14 +209,6 @@ const styles = {
     maxWidth: "280px",
     justifyContent: "center",
     margin: "0 auto",
-  },
-  error: {
-    backgroundColor: "#fee",
-    color: "#c00",
-    padding: "10px",
-    borderRadius: "6px",
-    marginBottom: "16px",
-    fontSize: "14px",
   },
   footer: {
     marginTop: "20px",

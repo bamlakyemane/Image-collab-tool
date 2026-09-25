@@ -26,12 +26,18 @@ API.interceptors.request.use(
 API.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      const isSharedRoute = error.config?.url?.includes("/shared/");
-      if (!isSharedRoute) {
-        localStorage.removeItem("token");
-        window.location.href = "/login";
-      }
+    const isSharedRoute = error.config?.url?.includes("/shared/");
+    const isLoginRequest = error.config?.url?.includes("/auth/login");
+    const isSignupRequest = error.config?.url?.includes("/auth/signup");
+
+    if (
+      error.response?.status === 401 &&
+      !isSharedRoute &&
+      !isLoginRequest &&
+      !isSignupRequest
+    ) {
+      localStorage.removeItem("token");
+      window.location.href = "/login";
     }
     return Promise.reject(error);
   },

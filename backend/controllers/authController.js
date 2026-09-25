@@ -65,8 +65,8 @@ const login = async (req, res) => {
 
     const { email, password } = req.body;
 
+    // ✅ Find user (case-insensitive handled in model)
     const user = await User.findByEmail(email);
-
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -74,8 +74,8 @@ const login = async (req, res) => {
       });
     }
 
+    // Check password
     const isPasswordValid = await User.comparePassword(user, password);
-
     if (!isPasswordValid) {
       return res.status(401).json({
         success: false,
@@ -93,13 +93,16 @@ const login = async (req, res) => {
       message: "Login successful",
     });
   } catch (error) {
+    console.error("Login error DETAILS:", error);
+    console.error("Error message:", error.message);
+    console.error("Error stack:", error.stack);
     res.status(500).json({
       success: false,
       message: "Server error during login",
+      error: error.message, // Temporary for debugging
     });
   }
 };
-
 // Get current user profile (protected route)
 const getProfile = async (req, res) => {
   try {
