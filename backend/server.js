@@ -23,18 +23,27 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
-// ✅ ONLY ONE CORS MIDDLEWARE - This is the correct one!
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps, curl, Postman)
+      // Allow requests with no origin
       if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+      // ✅ Allow all Vercel preview URLs
+      if (
+        origin.endsWith(".vercel.app") &&
+        origin.includes("image-collab-tool")
+      ) {
+        return callback(null, true);
       }
+
+      // ✅ Allow exact matches
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      console.log("❌ CORS blocked:", origin);
+      callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
   }),
