@@ -51,8 +51,21 @@ app.use(
 
 app.use(express.json());
 
-// Serve static files (uploads)
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// ✅ Serve static files with CORS headers for images
+app.use(
+  "/uploads",
+  (req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    res.setHeader("Timing-Allow-Origin", "*");
+    next();
+  },
+  express.static(path.join(__dirname, "uploads"), {
+    maxAge: "1d",
+    etag: true,
+    lastModified: true,
+  }),
+);
 
 // Routes
 app.use("/api/auth", authRoutes);
