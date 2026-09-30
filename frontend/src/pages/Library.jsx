@@ -12,6 +12,7 @@ import {
   deleteImage,
 } from "../services/imageService";
 import { BACKEND_URL } from "../config";
+import ThemeToggle from "../components/ThemeToggle";
 
 const Library = () => {
   const { user, logout, loading: authLoading } = useAuth();
@@ -133,7 +134,7 @@ const Library = () => {
         <h1>📸 Image Library</h1>
         <div style={styles.userInfo}>
           <span>Welcome, {user?.name}!</span>
-
+          <ThemeToggle />
           {/* ✅ Admin button (only visible to admin/super_admin) */}
           {user?.role && user.role.includes("admin") && (
             <Link to="/admin" style={styles.adminLink}>
@@ -282,15 +283,15 @@ const Library = () => {
 const styles = {
   container: {
     minHeight: "100vh",
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "var(--bg-secondary)",
   },
   header: {
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     padding: "20px 40px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    borderBottom: "1px solid #ddd",
+    borderBottom: "1px solid var(--border-color)",
     flexWrap: "wrap",
     gap: "10px",
   },
@@ -303,7 +304,7 @@ const styles = {
   adminLink: {
     padding: "6px 14px",
     backgroundColor: "#6f42c1",
-    color: "white",
+    color: "var(--bg-card)",
     borderRadius: "4px",
     textDecoration: "none",
     fontSize: "14px",
@@ -312,7 +313,7 @@ const styles = {
   uploadBtn: {
     padding: "8px 16px",
     backgroundColor: "#28a745",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -321,7 +322,7 @@ const styles = {
   logoutBtn: {
     padding: "8px 16px",
     backgroundColor: "#dc3545",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -333,11 +334,11 @@ const styles = {
     margin: "0 auto",
   },
   uploadSection: {
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     padding: "30px",
     borderRadius: "10px",
     marginBottom: "30px",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+    boxShadow: "var(--shadow-sm)",
   },
   grid: {
     display: "grid",
@@ -345,10 +346,10 @@ const styles = {
     gap: "25px",
   },
   card: {
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     borderRadius: "10px",
     overflow: "hidden",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.08)",
+    boxShadow: "var(--shadow-sm)",
     transition: "transform 0.2s, box-shadow 0.2s",
   },
   imageContainer: {
@@ -369,7 +370,7 @@ const styles = {
     top: "10px",
     right: "10px",
     backgroundColor: "rgba(0,0,0,0.7)",
-    color: "white",
+    color: "var(--bg-card)",
     padding: "4px 10px",
     borderRadius: "20px",
     fontSize: "13px",
@@ -391,7 +392,7 @@ const styles = {
   fileName: {
     fontSize: "15px",
     fontWeight: "600",
-    color: "#333",
+    color: "var(--text-primary)",
     display: "block",
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -405,13 +406,13 @@ const styles = {
     justifyContent: "space-between",
     padding: "4px 0",
     fontSize: "13px",
-    borderBottom: "1px solid #f5f5f5",
+    borderBottom: "var(--bg-secondary) 1px solid",
   },
   detailLabel: {
     color: "#888",
   },
   detailValue: {
-    color: "#333",
+    color: "var(--text-primary)",
     fontWeight: "500",
   },
   timeAgo: {
@@ -430,7 +431,7 @@ const styles = {
     flex: 1,
     padding: "6px 12px",
     backgroundColor: "#17a2b8",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -440,7 +441,7 @@ const styles = {
     flex: 1,
     padding: "6px 12px",
     backgroundColor: "#007bff",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -450,7 +451,7 @@ const styles = {
     flex: 1,
     padding: "6px 12px",
     backgroundColor: "#dc3545",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -459,9 +460,9 @@ const styles = {
   emptyState: {
     textAlign: "center",
     padding: "60px 20px",
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     borderRadius: "10px",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+    boxShadow: "var(--shadow-sm)",
   },
   emptyIcon: {
     fontSize: "64px",
@@ -471,7 +472,7 @@ const styles = {
     marginTop: "20px",
     padding: "10px 30px",
     backgroundColor: "#007bff",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "6px",
     cursor: "pointer",
@@ -480,7 +481,7 @@ const styles = {
   loading: {
     textAlign: "center",
     padding: "60px",
-    color: "#666",
+    color: "var(--text-secondary)",
     fontSize: "18px",
   },
   error: {

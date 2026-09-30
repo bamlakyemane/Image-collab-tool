@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import ScrollAnimation from "../components/ScrollAnimation";
 import "../styles/animations.css";
+import ThemeToggle from "../components/ThemeToggle";
 
 const Home = () => {
   const { isAuthenticated } = useAuth();
@@ -18,6 +19,7 @@ const Home = () => {
             📸 ImageCollab
           </Link>
           <div style={styles.navLinks}>
+            <ThemeToggle />
             {isAuthenticated ? (
               <Link to="/library" style={styles.primaryBtn}>
                 Go to Library →
@@ -286,7 +288,7 @@ const Home = () => {
 const styles = {
   container: {
     minHeight: "100vh",
-    backgroundColor: "#ffffff",
+    backgroundColor: "var(--bg-card)",
   },
   // ===== NAVBAR =====
   navbar: {
@@ -327,7 +329,7 @@ const styles = {
   primaryBtn: {
     padding: "10px 22px",
     backgroundColor: "#4F46E5",
-    color: "white",
+    color: "var(--bg-card)",
     textDecoration: "none",
     fontSize: "15px",
     fontWeight: "600",
@@ -378,7 +380,7 @@ const styles = {
   },
   heroSubtitle: {
     fontSize: "18px",
-    color: "#666",
+    color: "var(--text-secondary)",
     lineHeight: "1.6",
     margin: 0,
   },
@@ -390,7 +392,7 @@ const styles = {
   heroCta: {
     padding: "14px 28px",
     backgroundColor: "#4F46E5",
-    color: "white",
+    color: "var(--bg-card)",
     textDecoration: "none",
     borderRadius: "10px",
     fontSize: "16px",
@@ -399,8 +401,8 @@ const styles = {
   },
   heroSecondary: {
     padding: "14px 28px",
-    backgroundColor: "white",
-    color: "#1a1a2e",
+    backgroundColor: "var(--bg-card)",
+    color: "var(--text-primary)",
     textDecoration: "none",
     borderRadius: "10px",
     fontSize: "16px",
@@ -437,7 +439,7 @@ const styles = {
   mockup: {
     width: "100%",
     maxWidth: "500px",
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     borderRadius: "16px",
     boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
     overflow: "hidden",
@@ -473,7 +475,7 @@ const styles = {
     width: "28px",
     height: "28px",
     backgroundColor: "#ef4444",
-    color: "white",
+    color: "var(--bg-card)",
     borderRadius: "50%",
     display: "flex",
     alignItems: "center",
@@ -490,7 +492,7 @@ const styles = {
     width: "28px",
     height: "28px",
     backgroundColor: "#10b981",
-    color: "white",
+    color: "var(--bg-card)",
     borderRadius: "50%",
     display: "flex",
     alignItems: "center",
@@ -511,10 +513,10 @@ const styles = {
   mockupComment: {
     fontSize: "11px",
     padding: "6px 8px",
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     borderRadius: "6px",
     border: "1px solid #e5e7eb",
-    color: "#555",
+    color: "var(--text-primary)",
   },
 
   // ===== FEATURES =====
@@ -534,7 +536,7 @@ const styles = {
   },
   sectionSubtitle: {
     fontSize: "18px",
-    color: "#666",
+    color: "var(--text-secondary)",
     margin: 0,
   },
   featuresGrid: {
@@ -563,7 +565,7 @@ const styles = {
   },
   featureDesc: {
     fontSize: "15px",
-    color: "#666",
+    color: "var(--text-secondary)",
     lineHeight: "1.6",
     margin: 0,
   },
@@ -582,7 +584,7 @@ const styles = {
   },
   stepCard: {
     padding: "32px",
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     borderRadius: "16px",
     textAlign: "center",
     boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
@@ -592,7 +594,7 @@ const styles = {
     height: "48px",
     margin: "0 auto 16px",
     backgroundColor: "#4F46E5",
-    color: "white",
+    color: "var(--bg-card)",
     borderRadius: "50%",
     display: "flex",
     alignItems: "center",
@@ -608,7 +610,7 @@ const styles = {
   },
   stepDesc: {
     fontSize: "15px",
-    color: "#666",
+    color: "var(--text-secondary)",
     lineHeight: "1.6",
     margin: 0,
   },
@@ -622,7 +624,7 @@ const styles = {
     maxWidth: "800px",
     margin: "0 auto",
     textAlign: "center",
-    color: "white",
+    color: "var(--bg-card)",
   },
   ctaTitle: {
     fontSize: "42px",
@@ -637,8 +639,8 @@ const styles = {
   ctaButton: {
     display: "inline-block",
     padding: "16px 36px",
-    backgroundColor: "white",
-    color: "#4F46E5",
+    backgroundColor: "var(--bg-card)",
+    color: "var(--text-primary)",
     textDecoration: "none",
     borderRadius: "10px",
     fontSize: "17px",
@@ -649,7 +651,7 @@ const styles = {
   // ===== FOOTER =====
   footer: {
     backgroundColor: "#1a1a2e",
-    color: "white",
+    color: "var(--bg-card)",
     padding: "40px 24px",
   },
   footerContent: {
@@ -679,7 +681,7 @@ const styles = {
     fontSize: "15px",
   },
   footerCopyright: {
-    color: "#666",
+    color: "var(--text-secondary)",
     fontSize: "13px",
     margin: 0,
   },

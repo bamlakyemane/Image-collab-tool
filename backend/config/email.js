@@ -1,5 +1,5 @@
 // backend/config/email.js
-
+/*
 const nodemailer = require("nodemailer");
 
 let transporter = null;
@@ -25,3 +25,4 @@ if (process.env.EMAIL_USER && process.env.EMAIL_PASSWORD) {
 }
 
 module.exports = transporter;
+*/

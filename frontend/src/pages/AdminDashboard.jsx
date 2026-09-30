@@ -7,6 +7,7 @@ import API from "../services/api";
 import { BACKEND_URL } from "../config";
 import { Link } from "react-router-dom";
 import { showSuccess, showError, showWarning } from "../utils/toast";
+import ThemeToggle from "../components/ThemeToggle";
 
 const AdminDashboard = () => {
   const { user, logout } = useAuth();
@@ -165,6 +166,7 @@ const AdminDashboard = () => {
         </div>
         <div style={styles.userInfo}>
           <span>Welcome, {user?.name}!</span>
+          <ThemeToggle />
           <button onClick={logout} style={styles.logoutBtn}>
             Logout
           </button>
@@ -360,7 +362,7 @@ const AdminDashboard = () => {
                                 ? "#007bff"
                                 : user.role === "moderator"
                                   ? "#6f42c1"
-                                  : "#333",
+                                  : "var(--text-primary)",
                           }}
                         >
                           <option value="user">User</option>
@@ -428,7 +430,7 @@ const AdminDashboard = () => {
                             fontSize: "12px",
                             borderRadius: "4px",
                             border: "none",
-                            color: "white",
+                            color: "var(--bg-card)",
                             cursor: "pointer",
                             transition: "background-color 0.2s",
                           }}
@@ -714,19 +716,19 @@ const styles = {
     backgroundColor: "#f5f5f5",
   },
   header: {
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     padding: "20px 40px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    borderBottom: "1px solid #ddd",
+    border: "1px solid var(--border-color)",
     flexWrap: "wrap",
     gap: "10px",
   },
   title: {
     margin: 0,
     fontSize: "24px",
-    color: "#333",
+    color: "var(--text-primary)",
   },
   userInfo: {
     display: "flex",
@@ -736,7 +738,7 @@ const styles = {
   logoutBtn: {
     padding: "8px 16px",
     backgroundColor: "#dc3545",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -744,8 +746,8 @@ const styles = {
   tabs: {
     display: "flex",
     gap: "0",
-    backgroundColor: "white",
-    borderBottom: "1px solid #ddd",
+    backgroundColor: "var(--bg-card)",
+    borderBottom: "1px solid var(--border-color)",
     padding: "0 40px",
   },
   tab: {
@@ -754,7 +756,7 @@ const styles = {
     backgroundColor: "transparent",
     cursor: "pointer",
     fontSize: "16px",
-    color: "#666",
+    color: "var(--text-secondary)",
     borderBottom: "3px solid transparent",
     transition: "all 0.2s",
   },
@@ -774,7 +776,7 @@ const styles = {
     marginBottom: "30px",
   },
   statCard: {
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     padding: "20px",
     borderRadius: "10px",
     boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
@@ -783,15 +785,15 @@ const styles = {
   statNumber: {
     fontSize: "32px",
     margin: "0 0 5px 0",
-    color: "#333",
+    color: "var(--text-primary)",
   },
   statLabel: {
     margin: 0,
-    color: "#666",
+    color: "var(--text-secondary)",
     fontSize: "14px",
   },
   tableContainer: {
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     padding: "20px",
     borderRadius: "10px",
     boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
@@ -830,7 +832,7 @@ const styles = {
     padding: "10px 10px",
     borderBottom: "1px solid #f1f3f5",
     verticalAlign: "middle",
-    color: "#333",
+    color: "var(--text-primary)",
     fontSize: "13px",
     wordBreak: "break-word",
   },
@@ -869,10 +871,10 @@ const styles = {
   },
   userName: {
     fontWeight: "500",
-    color: "#333",
+    color: "var(--text-primary)",
   },
   userEmail: {
-    color: "#555",
+    color: "var(--text-secondary)",
     fontSize: "13px",
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -882,7 +884,7 @@ const styles = {
   },
   userCount: {
     fontSize: "14px",
-    color: "#666",
+    color: "var(--text-secondary)",
     backgroundColor: "#f8f9fa",
     padding: "4px 12px",
     borderRadius: "4px",
@@ -897,14 +899,14 @@ const styles = {
   select: {
     padding: "4px 8px",
     borderRadius: "4px",
-    border: "1px solid #ddd",
+    border: "1px solid var(--border-color)",
     fontSize: "13px",
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     cursor: "pointer",
   },
   actionBtn: {
     padding: "4px 12px",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -914,7 +916,7 @@ const styles = {
   deleteBtn: {
     padding: "4px 12px",
     backgroundColor: "#dc3545",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -923,7 +925,7 @@ const styles = {
   bulkDeleteBtn: {
     padding: "6px 16px",
     backgroundColor: "#dc3545",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -939,7 +941,7 @@ const styles = {
     alignItems: "center",
     height: "100vh",
     fontSize: "18px",
-    color: "#666",
+    color: "var(--text-secondary)",
   },
   error: {
     display: "flex",
@@ -961,8 +963,8 @@ const styles = {
   },
   backBtn: {
     padding: "8px 16px",
-    backgroundColor: "#f1f3f5",
-    color: "#333",
+    backgroundColor: "var(--bg-card)",
+    color: "var(--text-primary)",
     textDecoration: "none",
     borderRadius: "6px",
     fontSize: "14px",

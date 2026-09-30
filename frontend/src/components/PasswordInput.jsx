@@ -79,7 +79,7 @@ const styles = {
   input: {
     width: "100%",
     padding: "10px 45px 10px 12px",
-    border: "1px solid #ddd",
+    border: "1px solid var(--border-color)",
     borderRadius: "6px",
     fontSize: "16px",
     transition: "border-color 0.2s",
@@ -97,7 +97,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    color: "#666",
+    color: "var(--text-secondary)",
     borderRadius: "4px",
     transition: "color 0.2s, background-color 0.2s",
   },

@@ -333,7 +333,7 @@ const styles = {
     zIndex: 1000,
   },
   modal: {
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     borderRadius: "12px",
     width: "90%",
     maxWidth: "700px",
@@ -351,14 +351,14 @@ const styles = {
   title: {
     margin: 0,
     fontSize: "20px",
-    color: "#333",
+    color: "var(--text-primary)",
   },
   closeBtn: {
     background: "none",
     border: "none",
     fontSize: "24px",
     cursor: "pointer",
-    color: "#999",
+    color: "var(--text-muted)",
     padding: "0 5px",
   },
   body: {
@@ -382,7 +382,7 @@ const styles = {
   fileName: {
     fontSize: "16px",
     fontWeight: "500",
-    color: "#333",
+    color: "var(--text-primary)",
   },
   formSection: {
     marginBottom: "25px",
@@ -390,7 +390,7 @@ const styles = {
   sectionTitle: {
     fontSize: "16px",
     fontWeight: "600",
-    color: "#333",
+    color: "var(--text-primary)",
     marginBottom: "15px",
   },
   formGroup: {
@@ -400,13 +400,13 @@ const styles = {
     display: "block",
     fontSize: "14px",
     fontWeight: "500",
-    color: "#555",
+    color: "var(--text-secondary)",
     marginBottom: "5px",
   },
   input: {
     width: "100%",
     padding: "10px 12px",
-    border: "1px solid #ddd",
+    border: "1px solid var(--border-color)",
     borderRadius: "6px",
     fontSize: "14px",
   },
@@ -416,7 +416,7 @@ const styles = {
     gap: "8px",
     fontSize: "14px",
     fontWeight: "500",
-    color: "#555",
+    color: "var(--text-secondary)",
     cursor: "pointer",
   },
   checkbox: {
@@ -427,7 +427,7 @@ const styles = {
   hint: {
     display: "block",
     fontSize: "12px",
-    color: "#999",
+    color: "var(--text-muted)",
     marginTop: "4px",
     marginLeft: "26px",
   },
@@ -441,7 +441,7 @@ const styles = {
     width: "100%",
     padding: "12px",
     backgroundColor: "#007bff",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "6px",
     fontSize: "16px",
@@ -483,15 +483,15 @@ const styles = {
     border: "1px solid #b8daff",
     borderRadius: "4px",
     fontSize: "13px",
-    backgroundColor: "white",
-    color: "#333",
+    backgroundColor: "var(--bg-card)",
+    color: "var(--text-primary)",
     fontFamily: "monospace",
     wordBreak: "break-all",
   },
   copyBtn: {
     padding: "8px 16px",
     backgroundColor: "#007bff",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -539,7 +539,7 @@ const styles = {
     flexWrap: "wrap",
     gap: "10px",
     fontSize: "12px",
-    color: "#666",
+    color: "var(--text-secondary)",
   },
   status: {
     fontWeight: "600",
@@ -566,7 +566,7 @@ const styles = {
   deactivateBtn: {
     padding: "4px 12px",
     backgroundColor: "#ffc107",
-    color: "#333",
+    color: "var(--text-primary)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -575,7 +575,7 @@ const styles = {
   activateBtn: {
     padding: "4px 12px",
     backgroundColor: "#28a745",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -584,7 +584,7 @@ const styles = {
   revokeBtn: {
     padding: "4px 12px",
     backgroundColor: "#dc3545",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -593,7 +593,7 @@ const styles = {
   deleteBtn: {
     padding: "4px 12px",
     backgroundColor: "#6c757d",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -602,13 +602,13 @@ const styles = {
   loadingLinks: {
     textAlign: "center",
     padding: "20px",
-    color: "#999",
+    color: "var(--text-muted)",
     fontSize: "14px",
   },
   noLinks: {
     textAlign: "center",
     padding: "20px",
-    color: "#999",
+    color: "var(--text-muted)",
     fontSize: "14px",
   },
 };

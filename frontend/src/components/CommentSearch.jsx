@@ -62,8 +62,13 @@ const CommentSearch = ({ onSearch, onFilter, filterOptions }) => {
           style={{
             ...styles.filterBtn,
             backgroundColor:
-              showFilters || getFilterCount() > 0 ? "#007bff" : "#f0f0f0",
-            color: showFilters || getFilterCount() > 0 ? "white" : "#666",
+              showFilters || getFilterCount() > 0
+                ? "#007bff"
+                : "var(--bg-card)",
+            color:
+              showFilters || getFilterCount() > 0
+                ? "var(--bg-card)"
+                : "var(--text-secondary)",
           }}
         >
           <FiFilter />
@@ -137,8 +142,8 @@ const styles = {
   searchBar: {
     display: "flex",
     alignItems: "center",
-    backgroundColor: "white",
-    border: "1px solid #ddd",
+    backgroundColor: "var(--bg-card)",
+    border: "1px solid var(--border-color)",
     borderRadius: "8px",
     padding: "8px 12px",
     transition: "border-color 0.2s",
@@ -148,7 +153,7 @@ const styles = {
     },
   },
   searchIcon: {
-    color: "#999",
+    color: "var(--text-muted)",
     fontSize: "18px",
     marginRight: "10px",
     flexShrink: 0,
@@ -160,22 +165,22 @@ const styles = {
     fontSize: "14px",
     padding: "4px 0",
     background: "transparent",
-    color: "#333",
+    color: "var(--text-primary)",
     "::placeholder": {
-      color: "#999",
+      color: "var(--text-muted)",
     },
   },
   clearBtn: {
     background: "none",
     border: "none",
     cursor: "pointer",
-    color: "#999",
+    color: "var(--text-muted)",
     padding: "4px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     ":hover": {
-      color: "#333",
+      color: "var(--text-primary)",
     },
   },
   filterBtn: {
@@ -194,7 +199,7 @@ const styles = {
   },
   filterBadge: {
     backgroundColor: "#dc3545",
-    color: "white",
+    color: "var(--bg-card)",
     borderRadius: "50%",
     padding: "1px 6px",
     fontSize: "10px",
@@ -205,7 +210,7 @@ const styles = {
     position: "absolute",
     top: "calc(100% + 8px)",
     right: 0,
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     borderRadius: "8px",
     boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
     padding: "16px",
@@ -223,7 +228,7 @@ const styles = {
     alignItems: "center",
     gap: "10px",
     fontSize: "14px",
-    color: "#333",
+    color: "var(--text-primary)",
     cursor: "pointer",
     padding: "4px 0",
     ":hover": {
@@ -248,11 +253,11 @@ const styles = {
   clearFiltersBtn: {
     padding: "4px 12px",
     backgroundColor: "#f8f9fa",
-    border: "1px solid #ddd",
+    border: "1px solid var(--border-color)",
     borderRadius: "4px",
     cursor: "pointer",
     fontSize: "12px",
-    color: "#666",
+    color: "	var(--text-secondary)",
     ":hover": {
       backgroundColor: "#e9ecef",
     },

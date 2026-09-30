@@ -660,7 +660,7 @@ const styles = {
   },
   toolbarBtn: {
     padding: "8px 20px",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "6px",
     cursor: "pointer",
@@ -669,11 +669,11 @@ const styles = {
   },
   hint: {
     fontSize: "14px",
-    color: "#666",
+    color: "var(--text-secondary)",
   },
   loginHint: {
     fontSize: "14px",
-    color: "#666",
+    color: "var(--text-secondary)",
   },
   loginLink: {
     color: "#007bff",
@@ -688,7 +688,7 @@ const styles = {
   zoomBtn: {
     padding: "6px 12px",
     backgroundColor: "#f8f9fa",
-    border: "1px solid #ddd",
+    border: "1px solid var(--border-color)",
     borderRadius: "4px",
     cursor: "pointer",
     fontSize: "16px",
@@ -700,7 +700,7 @@ const styles = {
   zoomLevel: {
     fontSize: "14px",
     fontWeight: "500",
-    color: "#333",
+    color: "var(--text-primary)",
     minWidth: "50px",
     textAlign: "center",
   },
@@ -733,7 +733,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     transform: "translate(-50%, -50%)",
-    color: "white",
+    color: "var(--bg-card)",
     fontSize: "11px",
     fontWeight: "bold",
     cursor: "pointer",
@@ -743,7 +743,7 @@ const styles = {
   pinCount: {
     fontSize: "11px",
     fontWeight: "bold",
-    color: "white",
+    color: "var(--bg-card)",
     textShadow: "0 1px 2px rgba(0,0,0,0.3)",
   },
   newPinInput: {
@@ -751,7 +751,7 @@ const styles = {
     bottom: "20px",
     left: "50%",
     transform: "translateX(-50%)",
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     padding: "15px",
     borderRadius: "10px",
     boxShadow: "0 2px 15px rgba(0,0,0,0.2)",
@@ -762,7 +762,7 @@ const styles = {
   textarea: {
     width: "100%",
     padding: "10px",
-    border: "1px solid #ddd",
+    border: "1px solid var(--border-color)",
     borderRadius: "6px",
     fontSize: "14px",
     resize: "vertical",
@@ -777,7 +777,7 @@ const styles = {
   cancelBtn: {
     padding: "8px 16px",
     backgroundColor: "#6c757d",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "6px",
     cursor: "pointer",
@@ -785,18 +785,18 @@ const styles = {
   submitBtn: {
     padding: "8px 16px",
     backgroundColor: "#007bff",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "6px",
     cursor: "pointer",
   },
   sidebar: {
     width: "350px",
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     borderRadius: "10px",
     padding: "20px",
     overflowY: "auto",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+    boxShadow: "var(--shadow-sm)",
   },
   sidebarHeader: {
     marginBottom: "15px",
@@ -804,16 +804,16 @@ const styles = {
   sidebarTitle: {
     margin: "0 0 15px 0",
     fontSize: "18px",
-    color: "#333",
+    color: "var(--text-primary)",
   },
   loading: {
     textAlign: "center",
-    color: "#999",
+    color: "var(--text-muted)",
     padding: "20px",
   },
   empty: {
     textAlign: "center",
-    color: "#999",
+    color: "var(--text-muted)",
     padding: "40px 20px",
   },
   pinsList: {
@@ -833,24 +833,24 @@ const styles = {
   },
   pinAuthor: {
     fontWeight: "500",
-    color: "#333",
+    color: "var(--text-primary)",
     fontSize: "14px",
   },
   pinTime: {
     fontSize: "12px",
-    color: "#999",
+    color: "var(--text-muted)",
   },
   pinStatus: {
     fontSize: "14px",
   },
   pinPosition: {
     fontSize: "12px",
-    color: "#999",
+    color: "var(--text-muted)",
     marginBottom: "6px",
   },
   pinContent: {
     fontSize: "14px",
-    color: "#333",
+    color: "var(--text-primary)",
     marginBottom: "8px",
   },
   replies: {
@@ -861,7 +861,7 @@ const styles = {
   reply: {
     fontSize: "13px",
     padding: "4px 0",
-    color: "#555",
+    color: "var(--text-secondary)",
   },
   pinActions: {
     display: "flex",
@@ -878,7 +878,7 @@ const styles = {
   },
   resolveBtn: {
     padding: "4px 12px",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
@@ -892,14 +892,14 @@ const styles = {
   replyInputField: {
     flex: 1,
     padding: "6px 10px",
-    border: "1px solid #ddd",
+    border: "1px solid var(--border-color)",
     borderRadius: "4px",
     fontSize: "13px",
   },
   replySubmitBtn: {
     padding: "6px 12px",
     backgroundColor: "#007bff",
-    color: "white",
+    color: "var(--bg-card)",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
