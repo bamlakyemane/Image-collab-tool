@@ -409,14 +409,14 @@ const styles = {
     borderBottom: "var(--bg-secondary) 1px solid",
   },
   detailLabel: {
-    color: "#888",
+    color: "var(--text-tertiary)",
   },
   detailValue: {
     color: "var(--text-primary)",
     fontWeight: "500",
   },
   timeAgo: {
-    color: "#888",
+    color: "var(--text-muted)",
     fontWeight: "400",
     fontSize: "12px",
   },

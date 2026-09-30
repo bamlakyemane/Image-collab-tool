@@ -79,11 +79,13 @@ const styles = {
   input: {
     width: "100%",
     padding: "10px 45px 10px 12px",
-    border: "1px solid var(--border-color)",
+    border: "1px solid var(--input-border)",
     borderRadius: "6px",
     fontSize: "16px",
     transition: "border-color 0.2s",
     boxSizing: "border-box",
+    backgroundColor: "var(--input-bg)", // ✅
+    color: "var(--input-text)", // ✅
   },
   toggleBtn: {
     position: "absolute",
@@ -97,7 +99,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    color: "var(--text-secondary)",
+    color: "var(--text-tertiary)",
     borderRadius: "4px",
     transition: "color 0.2s, background-color 0.2s",
   },

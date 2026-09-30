@@ -3,9 +3,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import ThemeToggle from "../components/ThemeToggle";
 import ScrollAnimation from "../components/ScrollAnimation";
 import "../styles/animations.css";
-import ThemeToggle from "../components/ThemeToggle";
 
 const Home = () => {
   const { isAuthenticated } = useAuth();
@@ -288,15 +288,17 @@ const Home = () => {
 const styles = {
   container: {
     minHeight: "100vh",
-    backgroundColor: "var(--bg-card)",
+    backgroundColor: "var(--bg-primary)",
+    color: "var(--text-primary)",
   },
+
   // ===== NAVBAR =====
   navbar: {
     position: "sticky",
     top: 0,
-    backgroundColor: "rgba(255, 255, 255, 0.95)",
+    backgroundColor: "var(--bg-card)",
     backdropFilter: "blur(10px)",
-    borderBottom: "1px solid #f0f0f0",
+    borderBottom: "1px solid var(--border-color)",
     zIndex: 100,
   },
   navContent: {
@@ -310,7 +312,7 @@ const styles = {
   logo: {
     fontSize: "22px",
     fontWeight: "700",
-    color: "#1a1a2e",
+    color: "var(--text-primary)",
     textDecoration: "none",
   },
   navLinks: {
@@ -320,7 +322,7 @@ const styles = {
   },
   secondaryBtn: {
     padding: "8px 18px",
-    color: "#1a1a2e",
+    color: "var(--text-primary)",
     textDecoration: "none",
     fontSize: "15px",
     fontWeight: "500",
@@ -328,8 +330,8 @@ const styles = {
   },
   primaryBtn: {
     padding: "10px 22px",
-    backgroundColor: "#4F46E5",
-    color: "var(--bg-card)",
+    backgroundColor: "var(--accent)",
+    color: "white",
     textDecoration: "none",
     fontSize: "15px",
     fontWeight: "600",
@@ -340,7 +342,9 @@ const styles = {
   // ===== HERO =====
   hero: {
     padding: "80px 24px 60px",
-    background: "linear-gradient(135deg, #f5f7ff 0%, #ffffff 100%)",
+    background: "var(--bg-secondary)",
+    backgroundImage: "var(--hero-gradient)",
+    position: "relative",
   },
   heroContent: {
     maxWidth: "1200px",
@@ -358,8 +362,8 @@ const styles = {
   heroBadge: {
     display: "inline-block",
     padding: "6px 14px",
-    backgroundColor: "#EEF2FF",
-    color: "#4F46E5",
+    backgroundColor: "var(--badge-bg)",
+    color: "var(--badge-text)",
     borderRadius: "100px",
     fontSize: "13px",
     fontWeight: "600",
@@ -369,7 +373,7 @@ const styles = {
     fontSize: "52px",
     fontWeight: "800",
     lineHeight: "1.1",
-    color: "#1a1a2e",
+    color: "var(--text-primary)",
     margin: 0,
   },
   gradientText: {
@@ -391,8 +395,8 @@ const styles = {
   },
   heroCta: {
     padding: "14px 28px",
-    backgroundColor: "#4F46E5",
-    color: "var(--bg-card)",
+    backgroundColor: "var(--accent)",
+    color: "white",
     textDecoration: "none",
     borderRadius: "10px",
     fontSize: "16px",
@@ -407,14 +411,14 @@ const styles = {
     borderRadius: "10px",
     fontSize: "16px",
     fontWeight: "600",
-    border: "2px solid #e5e7eb",
+    border: "2px solid var(--border-color)",
   },
   heroStats: {
     display: "flex",
     gap: "30px",
     marginTop: "20px",
     paddingTop: "20px",
-    borderTop: "1px solid #e5e7eb",
+    borderTop: "1px solid var(--border-color)",
   },
   stat: {
     display: "flex",
@@ -424,11 +428,11 @@ const styles = {
   statNumber: {
     fontSize: "16px",
     fontWeight: "700",
-    color: "#4F46E5",
+    color: "var(--accent)",
   },
   statLabel: {
     fontSize: "13px",
-    color: "#888",
+    color: "var(--text-tertiary)",
   },
 
   // ===== HERO IMAGE MOCKUP =====
@@ -441,22 +445,22 @@ const styles = {
     maxWidth: "500px",
     backgroundColor: "var(--bg-card)",
     borderRadius: "16px",
-    boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
+    boxShadow: "var(--shadow-lg)",
     overflow: "hidden",
-    border: "1px solid #e5e7eb",
+    border: "1px solid var(--border-color)",
   },
   mockupHeader: {
     display: "flex",
     gap: "6px",
     padding: "12px 16px",
-    backgroundColor: "#f9fafb",
-    borderBottom: "1px solid #e5e7eb",
+    backgroundColor: "var(--bg-tertiary)",
+    borderBottom: "1px solid var(--border-color)",
   },
   dot: {
     width: "12px",
     height: "12px",
     borderRadius: "50%",
-    backgroundColor: "#e5e7eb",
+    backgroundColor: "var(--border-color)",
   },
   mockupBody: {
     display: "grid",
@@ -475,7 +479,7 @@ const styles = {
     width: "28px",
     height: "28px",
     backgroundColor: "#ef4444",
-    color: "var(--bg-card)",
+    color: "white",
     borderRadius: "50%",
     display: "flex",
     alignItems: "center",
@@ -492,7 +496,7 @@ const styles = {
     width: "28px",
     height: "28px",
     backgroundColor: "#10b981",
-    color: "var(--bg-card)",
+    color: "white",
     borderRadius: "50%",
     display: "flex",
     alignItems: "center",
@@ -503,26 +507,26 @@ const styles = {
     boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
   },
   mockupSidebar: {
-    backgroundColor: "#f9fafb",
+    backgroundColor: "var(--bg-tertiary)",
     padding: "12px",
     display: "flex",
     flexDirection: "column",
     gap: "8px",
-    borderLeft: "1px solid #e5e7eb",
+    borderLeft: "1px solid var(--border-color)",
   },
   mockupComment: {
     fontSize: "11px",
     padding: "6px 8px",
     backgroundColor: "var(--bg-card)",
     borderRadius: "6px",
-    border: "1px solid #e5e7eb",
-    color: "var(--text-primary)",
+    border: "1px solid var(--border-color)",
+    color: "var(--text-secondary)",
   },
 
   // ===== FEATURES =====
   features: {
     padding: "80px 24px",
-    backgroundColor: "#ffffff",
+    backgroundColor: "var(--bg-primary)",
   },
   sectionHeader: {
     textAlign: "center",
@@ -531,7 +535,7 @@ const styles = {
   sectionTitle: {
     fontSize: "40px",
     fontWeight: "800",
-    color: "#1a1a2e",
+    color: "var(--text-primary)",
     margin: "0 0 12px 0",
   },
   sectionSubtitle: {
@@ -548,9 +552,9 @@ const styles = {
   },
   featureCard: {
     padding: "32px",
-    backgroundColor: "#f9fafb",
+    backgroundColor: "var(--bg-card)",
     borderRadius: "16px",
-    border: "1px solid #f0f0f0",
+    border: "1px solid var(--border-color)",
     transition: "all 0.3s",
   },
   featureIcon: {
@@ -560,7 +564,7 @@ const styles = {
   featureTitle: {
     fontSize: "18px",
     fontWeight: "700",
-    color: "#1a1a2e",
+    color: "var(--text-primary)",
     margin: "0 0 10px 0",
   },
   featureDesc: {
@@ -573,7 +577,7 @@ const styles = {
   // ===== HOW IT WORKS =====
   howItWorks: {
     padding: "80px 24px",
-    backgroundColor: "#f9fafb",
+    backgroundColor: "var(--bg-secondary)",
   },
   stepsGrid: {
     maxWidth: "1000px",
@@ -587,14 +591,14 @@ const styles = {
     backgroundColor: "var(--bg-card)",
     borderRadius: "16px",
     textAlign: "center",
-    boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+    boxShadow: "var(--shadow-sm)",
   },
   stepNumber: {
     width: "48px",
     height: "48px",
     margin: "0 auto 16px",
-    backgroundColor: "#4F46E5",
-    color: "var(--bg-card)",
+    backgroundColor: "var(--accent)",
+    color: "white",
     borderRadius: "50%",
     display: "flex",
     alignItems: "center",
@@ -605,7 +609,7 @@ const styles = {
   stepTitle: {
     fontSize: "18px",
     fontWeight: "700",
-    color: "#1a1a2e",
+    color: "var(--text-primary)",
     margin: "0 0 10px 0",
   },
   stepDesc: {
@@ -624,7 +628,7 @@ const styles = {
     maxWidth: "800px",
     margin: "0 auto",
     textAlign: "center",
-    color: "var(--bg-card)",
+    color: "white",
   },
   ctaTitle: {
     fontSize: "42px",
@@ -639,8 +643,8 @@ const styles = {
   ctaButton: {
     display: "inline-block",
     padding: "16px 36px",
-    backgroundColor: "var(--bg-card)",
-    color: "var(--text-primary)",
+    backgroundColor: "white",
+    color: "#4F46E5",
     textDecoration: "none",
     borderRadius: "10px",
     fontSize: "17px",
@@ -650,9 +654,10 @@ const styles = {
 
   // ===== FOOTER =====
   footer: {
-    backgroundColor: "#1a1a2e",
-    color: "var(--bg-card)",
+    backgroundColor: "var(--bg-secondary)",
+    color: "var(--text-primary)",
     padding: "40px 24px",
+    borderTop: "1px solid var(--border-color)",
   },
   footerContent: {
     maxWidth: "1200px",
@@ -665,7 +670,7 @@ const styles = {
     marginBottom: "12px",
   },
   footerText: {
-    color: "#a0a0b0",
+    color: "var(--text-secondary)",
     fontSize: "15px",
     marginBottom: "20px",
   },
@@ -676,15 +681,17 @@ const styles = {
     marginBottom: "20px",
   },
   footerLink: {
-    color: "#a0a0b0",
+    color: "var(--text-secondary)",
     textDecoration: "none",
     fontSize: "15px",
   },
   footerCopyright: {
-    color: "var(--text-secondary)",
+    color: "var(--text-muted)",
     fontSize: "13px",
     margin: 0,
   },
+
+  // ===== UTILITY =====
   btnShine: {
     position: "relative",
     overflow: "hidden",

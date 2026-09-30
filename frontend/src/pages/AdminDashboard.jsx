@@ -713,7 +713,7 @@ const AdminDashboard = () => {
 const styles = {
   container: {
     minHeight: "100vh",
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "var(--bg-secondary)",
   },
   header: {
     backgroundColor: "var(--bg-card)",
@@ -724,6 +724,7 @@ const styles = {
     border: "1px solid var(--border-color)",
     flexWrap: "wrap",
     gap: "10px",
+    borderBottom: "1px solid var(--border-color)",
   },
   title: {
     margin: 0,
@@ -761,8 +762,8 @@ const styles = {
     transition: "all 0.2s",
   },
   tabActive: {
-    color: "#007bff",
-    borderBottom: "3px solid #007bff",
+    color: "var(--accent)",
+    borderBottom: "3px solid var(--accent)",
   },
   main: {
     padding: "30px 40px",
@@ -779,7 +780,7 @@ const styles = {
     backgroundColor: "var(--bg-card)",
     padding: "20px",
     borderRadius: "10px",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+    boxShadow: "var(--shadow-sm)",
     textAlign: "center",
   },
   statNumber: {
@@ -796,7 +797,7 @@ const styles = {
     backgroundColor: "var(--bg-card)",
     padding: "20px",
     borderRadius: "10px",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+    boxShadow: "var(--shadow-sm)",
     overflow: "hidden",
   },
   tableHeader: {

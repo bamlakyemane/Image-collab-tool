@@ -190,7 +190,7 @@ const styles = {
     backgroundColor: "var(--bg-card)",
     padding: "40px",
     borderRadius: "10px",
-    boxShadow: "var(--box-shadow)",
+    boxShadow: "var(--shadow-sm)",
     maxWidth: "400px",
     width: "100%",
   },
@@ -205,8 +205,8 @@ const styles = {
     fontSize: "16px",
   },
   infoMessage: {
-    backgroundColor: "#cce5ff",
-    color: "#004085",
+    backgroundColor: "var(--badge-bg)",
+    color: "var(--badge-text)",
     padding: "10px",
     borderRadius: "6px",
     marginBottom: "16px",
@@ -230,10 +230,12 @@ const styles = {
   },
   input: {
     padding: "10px 12px",
-    border: "1px solid var(--border-color)",
+    border: "1px solid var(--input-border)",
     borderRadius: "6px",
     fontSize: "16px",
     transition: "border-color 0.2s",
+    backgroundColor: "var(--input-bg)",
+    color: "var(--input-text)",
   },
   hint: {
     fontSize: "12px",
@@ -267,7 +269,7 @@ const styles = {
     fontSize: "14px",
   },
   link: {
-    color: "var(--link-color)",
+    color: "var(--accent)",
     textDecoration: "none",
     fontWeight: "500",
   },

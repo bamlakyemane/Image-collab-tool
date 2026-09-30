@@ -9,6 +9,9 @@
   --bg-input: #ffffff;
   --bg-hover: #f8f9fa;
   --bg-active: #e9ecef;
+  --hero-gradient: linear-gradient(135deg, #f5f7ff 0%, #ffffff 100%);
+  --badge-bg: #eef2ff;
+  --badge-text: #4f46e5;
 
   --text-primary: #1a1a2e;
   --text-secondary: #555555;
@@ -27,6 +30,16 @@
   --success: #10b981;
   --danger: #ef4444;
   --warning: #f59e0b;
+
+  --gradient-start: #4f46e5;
+  --gradient-end: #7c3aed;
+
+  --header-bg: #ffffff;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #dddddd;
+  --input-text: #1a1a2e;
+  --input-placeholder: #999999;
 }
 
 /* ✅ Dark theme */
@@ -56,6 +69,20 @@
   --success: #10b981;
   --danger: #ef4444;
   --warning: #f59e0b;
+
+  --hero-gradient: linear-gradient(135deg, #1a2332 0%, #0f172a 100%);
+  --badge-bg: #312e81;
+  --badge-text: #c7d2fe;
+
+  --gradient-start: #818cf8;
+  --gradient-end: #c4b5fd;
+
+  --header-bg: #1e293b;
+  --card-bg: #1e293b;
+  --input-bg: #334155;
+  --input-border: #475569;
+  --input-text: #f1f5f9;
+  --input-placeholder: #64748b;
 }
 
 /* ✅ Smooth transitions */
